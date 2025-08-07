@@ -1,0 +1,873 @@
+/* Nitrogen Hero Section */
+.nitrogen-hero {
+    position: relative;
+    min-height: 60vh;
+    background: linear-gradient(135deg, #374151 0%, #1F2937 50%, #111827 100%);
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.2) 0%, rgba(59, 130, 246, 0.1) 100%);
+    z-index: 1;
+}
+
+.racing-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.tire-track {
+    position: absolute;
+    width: 200px;
+    height: 4px;
+    background: repeating-linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.1) 0px,
+        rgba(255, 255, 255, 0.1) 10px,
+        transparent 10px,
+        transparent 15px
+    );
+    animation: raceTrack 4s linear infinite;
+}
+
+.track-1 {
+    top: 20%;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.track-2 {
+    top: 70%;
+    left: -200px;
+    animation-delay: 2s;
+}
+
+@keyframes raceTrack {
+    0% {
+        left: -200px;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+.racing-flag {
+    position: absolute;
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(45deg, #000 25%, transparent 25%),
+                linear-gradient(-45deg, #000 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #000 75%),
+                linear-gradient(-45deg, transparent 75%, #000 75%);
+    background-size: 10px 10px;
+    background-color: white;
+    animation: wave 2s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.flag-1 {
+    top: 15%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.flag-2 {
+    bottom: 15%;
+    right: 25%;
+    animation-delay: 1s;
+}
+
+@keyframes wave {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+}
+
+.nitrogen-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.nitrogen-hero .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.nitrogen-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-feature i {
+    color: #60A5FA;
+    font-size: 1.125rem;
+}
+
+/* Nitrogen Intro Section */
+.nitrogen-intro-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.intro-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.intro-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--stargas-darkgray);
+    text-align: center;
+}
+
+.intro-text h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #374151;
+    text-align: center;
+}
+
+.intro-text .lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--stargas-gray);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.intro-text p {
+    color: var(--stargas-gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Nitrogen Advantages */
+.nitrogen-advantages {
+    background: var(--stargas-lightgray);
+    padding: 3rem 2rem;
+    border-radius: var(--radius);
+    margin: 3rem 0;
+}
+
+.nitrogen-advantages h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--stargas-darkgray);
+    text-align: center;
+}
+
+.advantages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.advantage-item {
+    background: white;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.advantage-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.advantage-icon {
+    width: 60px;
+    height: 60px;
+    background: #374151;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    transition: var(--transition);
+}
+
+.advantage-item:hover .advantage-icon {
+    background: #1F2937;
+    transform: scale(1.1);
+}
+
+.advantage-item h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.advantage-item p {
+    color: var(--stargas-gray);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.contact-highlight {
+    background: var(--stargas-lightgray);
+    padding: 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    margin: 3rem 0;
+    border-left: 4px solid #374151;
+}
+
+.contact-highlight h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--stargas-darkgray);
+}
+
+.phone-link {
+    color: #374151;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+}
+
+.nitrogen-applications {
+    margin-top: 4rem;
+}
+
+.nitrogen-applications h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--stargas-darkgray);
+    text-align: center;
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.app-card {
+    background: var(--stargas-lightgray);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.app-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background: white;
+}
+
+.app-icon {
+    width: 60px;
+    height: 60px;
+    background: #374151;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    transition: var(--transition);
+}
+
+.app-card:hover .app-icon {
+    background: #1F2937;
+    transform: scale(1.1);
+}
+
+.app-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.app-card p {
+    color: var(--stargas-gray);
+    font-size: 0.9rem;
+}
+
+/* Nitrogen Products Section */
+.nitrogen-products-section {
+    padding: 5rem 0;
+    background: var(--stargas-lightgray);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--stargas-darkgray);
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--stargas-gray);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+    background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    position: relative;
+}
+
+.gas-cylinder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cylinder-body {
+    width: 70px;
+    height: 120px;
+    border-radius: 6px 6px 3px 3px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+
+/* Nitrogen Cylinder Colors */
+.cylinder-body.nitrogen-small {
+    background: linear-gradient(135deg, #374151 0%, #1F2937 100%);
+    width: 60px;
+    height: 100px;
+}
+
+.cylinder-body.nitrogen-medium {
+    background: linear-gradient(135deg, #374151 0%, #1F2937 100%);
+    width: 70px;
+    height: 120px;
+}
+
+.cylinder-body.nitrogen-large {
+    background: linear-gradient(135deg, #374151 0%, #1F2937 100%);
+    width: 80px;
+    height: 140px;
+}
+
+.cylinder-body.nitrogen-enthusiast {
+    background: linear-gradient(135deg, #7C2D12 0%, #92400E 100%);
+    width: 60px;
+    height: 100px;
+}
+
+.cylinder-body.nitrogen-aircraft {
+    background: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 100%);
+    width: 70px;
+    height: 120px;
+}
+
+.cylinder-body.nitrogen-kart {
+    background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+    width: 60px;
+    height: 100px;
+}
+
+.gas-label {
+    color: white;
+    font-weight: 800;
+    font-size: 0.875rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.racing-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+    animation: racingGlow 2s ease-in-out infinite;
+}
+
+@keyframes racingGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+    }
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.product-type {
+    color: var(--stargas-gray);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.product-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.product-features li {
+    padding: 0.25rem 0;
+    color: var(--stargas-gray);
+    font-size: 0.875rem;
+    position: relative;
+    padding-left: 1.25rem;
+}
+
+.product-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #374151;
+    font-weight: bold;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.availability {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.availability.in-stock {
+    color: #059669;
+}
+
+.availability i {
+    font-size: 1rem;
+}
+
+/* Why Choose Nitrogen Section */
+.why-choose-nitrogen {
+    padding: 5rem 0;
+    background: white;
+}
+
+.why-choose-nitrogen h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--stargas-darkgray);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--stargas-lightgray);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background: white;
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: #374151;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    transition: var(--transition);
+}
+
+.benefit-card:hover .benefit-icon {
+    background: #1F2937;
+    transform: scale(1.1);
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--stargas-darkgray);
+}
+
+.benefit-card p {
+    color: var(--stargas-gray);
+    line-height: 1.6;
+}
+
+/* Performance Comparison Section */
+.performance-comparison {
+    padding: 4rem 0;
+    background: var(--stargas-darkgray);
+    color: white;
+}
+
+.performance-comparison h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.comparison-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.comparison-card {
+    flex: 1;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.comparison-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.nitrogen-card {
+    border: 2px solid #10B981;
+}
+
+.air-card {
+    border: 2px solid #EF4444;
+}
+
+.comparison-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.nitrogen-card h3 {
+    color: #10B981;
+}
+
+.air-card h3 {
+    color: #EF4444;
+}
+
+.comparison-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comparison-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    font-weight: 500;
+}
+
+.comparison-list .fa-check {
+    color: #10B981;
+    font-size: 1.125rem;
+}
+
+.comparison-list .fa-times {
+    color: #EF4444;
+    font-size: 1.125rem;
+}
+
+.vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #F59E0B;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+/* Nitrogen CTA Section */
+.nitrogen-cta-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #374151 0%, #1F2937 100%);
+    color: white;
+}
+
+.cta-content {
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #374151;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .nitrogen-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .intro-text h2 {
+        font-size: 2rem;
+    }
+    
+    .advantages-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .applications-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-cards {
+        flex-direction: column;
+    }
+    
+    .vs-divider {
+        order: 1;
+        width: 80px;
+        height: 80px;
+        font-size: 1.5rem;
+    }
+    
+    .nitrogen-card {
+        order: 0;
+    }
+    
+    .air-card {
+        order: 2;
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Animation for product cards */
+.product-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Racing stripe animation for nitrogen theme */
+@keyframes racingStripe {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.racing-badge:hover {
+    animation: racingStripe 1s ease infinite;
+    background: linear-gradient(90deg, #F59E0B, #D97706, #F59E0B);
+    background-size: 200% 200%;
+}

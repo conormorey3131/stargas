@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Locator - Find Your Nearest Stargas Station</title>
+    <meta name="description" content="Find Stargas stations near you with our interactive store locator. Get directions, check opening hours, and discover available services.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link rel="shortcut icon" type="image/png" href="images/logo.png">
+    <link rel="apple-touch-icon" href="images/logo.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/store-locator.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Leaflet CSS for map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="index.html" class="logo">
+                        <img src="images/logo.png" alt="Stargas" width="120" height="40">
+                    </a>
+                    
+                    <div class="nav-menu" id="navMenu">
+                        <a href="index.html" class="nav-link">Home</a>
+                        <a href="index.html#about" class="nav-link">About Us</a>
+                        <a href="beer-gas.html" class="nav-link">Beer & Cellar Gas</a>
+                        <a href="welding-gas.html" class="nav-link">Welding Gas</a>
+                        <a href="propane-gas.html" class="nav-link">Propane & Butane</a>
+                        <a href="helium.html" class="nav-link">Helium</a>
+                        <a href="industrial-oxygen.html" class="nav-link">Industrial Oxygen</a>
+                        <a href="propylene.html" class="nav-link">Propylene</a>
+                        <a href="nitrogen.html" class="nav-link">Nitrogen</a>
+                        <a href="store-locator.html" class="nav-link active">Stockist Locator</a>
+                        <a href="contact.html" class="nav-link">Contact</a>
+                    </div>
+                    
+                    <div class="nav-actions">
+                        <div class="currency-toggle">
+                            <button class="currency-btn active" data-currency="EUR" aria-label="Switch to Euro">
+                                <i class="fas fa-euro-sign"></i> EUR
+                            </button>
+                            <button class="currency-btn" data-currency="GBP" aria-label="Switch to British Pound">
+                                <i class="fas fa-pound-sign"></i> GBP
+                            </button>
+                        </div>
+                        <button class="btn btn-primary nav-cta" onclick="window.location.href='store-locator.html'">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Find a Stockist
+                        </button>
+                    </div>
+                    
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <img src="images/logo.png" alt="Stargas" width="100">
+                <button class="mobile-menu-close" id="mobileMenuClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="mobile-menu-links">
+                <a href="index.html" class="mobile-menu-link">Home</a>
+                <a href="index.html#about" class="mobile-menu-link">About Us</a>
+                <a href="beer-gas.html" class="mobile-menu-link">Beer & Cellar Gas</a>
+                <a href="welding-gas.html" class="mobile-menu-link">Welding Gas</a>
+                <a href="propane-gas.html" class="mobile-menu-link">Propane & Butane</a>
+                <a href="helium.html" class="mobile-menu-link">Helium</a>
+                <a href="industrial-oxygen.html" class="mobile-menu-link">Industrial Oxygen</a>
+                <a href="propylene.html" class="mobile-menu-link">Propylene</a>
+                <a href="nitrogen.html" class="mobile-menu-link">Nitrogen</a>
+                <a href="store-locator.html" class="mobile-menu-link active">Stockist Locator</a>
+                <a href="contact.html" class="mobile-menu-link">Contact</a>
+                <div class="mobile-currency-toggle">
+                    <label for="mobileCurrency">Currency:</label>
+                    <div class="mobile-currency-buttons">
+                        <button class="mobile-currency-btn active" data-currency="EUR">
+                            <i class="fas fa-euro-sign"></i> EUR
+                        </button>
+                        <button class="mobile-currency-btn" data-currency="GBP">
+                            <i class="fas fa-pound-sign"></i> GBP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Store Locator Section -->
+    <section class="store-locator-full">
+        <div class="store-locator-container">
+            <!-- Sidebar -->
+            <div class="store-locator-sidebar">
+                <div class="sidebar-header">
+                    <h1>Find a Stockist</h1>
+                    <p>Locate your nearest authorized Stargas stockist</p>
+                </div>
+                
+                <!-- Search Controls -->
+                <div class="search-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by city, address, or zip..." class="search-input">
+                    </div>
+                    
+                    <button class="btn btn-outline btn-block" id="useLocationBtn">
+                        <i class="fas fa-location-arrow"></i>
+                        Use My Location
+                    </button>
+                    
+                    <!-- Distance Filter -->
+                    <div class="distance-filter">
+                        <h3>Maximum Distance</h3>
+                        <select id="distanceSelect" class="distance-select">
+                            <option value="5">5 km</option>
+                            <option value="10" selected>10 km</option>
+                            <option value="25">25 km</option>
+                            <option value="50">50 km</option>
+                            <option value="100">100 km</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Results Count -->
+                <div class="results-info">
+                    <span id="resultsCount">12 stations found</span>
+                </div>
+                
+                <!-- Store List -->
+                <div class="store-list" id="storeList">
+                    <!-- Store items will be dynamically added here -->
+                </div>
+            </div>
+            
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map" class="map"></div>
+                
+                <!-- Map Controls -->
+                <div class="map-controls">
+                    <button class="map-control" id="zoomInBtn" title="Zoom in">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <button class="map-control" id="zoomOutBtn" title="Zoom out">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button class="map-control" id="centerMapBtn" title="Center on my location">
+                        <i class="fas fa-crosshairs"></i>
+                    </button>
+                </div>
+                
+                <!-- Store Detail Popup -->
+                <div class="store-detail-popup" id="storeDetailPopup" style="display: none;">
+                    <button class="popup-close" id="popupClose">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="popup-content">
+                        <h3 id="popupTitle">Store Name</h3>
+                        <p id="popupAddress">Address</p>
+                        <div class="popup-info">
+                            <div class="info-item">
+                                <i class="fas fa-clock"></i>
+                                <span id="popupHours">Hours</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <span id="popupPhone">Phone</span>
+                            </div>
+                        </div>
+                        <div class="popup-services" id="popupServices">
+                            <!-- Services will be added dynamically -->
+                        </div>
+                        <div class="popup-actions">
+                            <button class="btn btn-primary" id="getDirectionsBtn">
+                                <i class="fas fa-route"></i>
+                                Get Directions
+                            </button>
+                            <button class="btn btn-outline" id="callStoreBtn">
+                                <i class="fas fa-phone"></i>
+                                Call Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="images/logo.png" alt="Stargas" class="footer-logo">
+                    <p>Your trusted energy partner across Ireland, providing quality fuel and exceptional service since 2010.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/StargasIreland" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/stargassuppliesltd" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/stargas-supplies-ltd" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="beer-gas.html">Beer & Cellar Gas</a></li>
+                        <li><a href="welding-gas.html">Welding Gas</a></li>
+                        <li><a href="propane-gas.html">Propane & Butane</a></li>
+                        <li><a href="helium.html">Helium</a></li>
+                        <li><a href="industrial-oxygen.html">Industrial Oxygen</a></li>
+                        <li><a href="propylene.html">Propylene</a></li>
+                        <li><a href="nitrogen.html">Nitrogen</a></li>
+                        <li><a href="store-locator.html">Find Stockists</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="index.html#about">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#safety">Safety</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Stargas Supplies Ltd.<br>Railway Road<br>Kilmallock<br>Limerick V35 TH92<br>Ireland</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+35363207000">063 20700</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:sales@stargas.ie">sales@stargas.ie</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2025</span> Stargas Ireland Ltd. All rights reserved.</p>
+                <p class="powered-by">Powered by <a href="https://moreydigital.ie" target="_blank" rel="noopener">Morey Digital</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/store-data.js"></script>
+    <script src="js/store-locator.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

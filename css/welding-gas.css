@@ -1,0 +1,475 @@
+/* Welding Gas Hero Section */
+.welding-hero {
+    position: relative;
+    min-height: 60vh;
+    background: linear-gradient(135deg, #1F2937 0%, #374151 50%, #4B5563 100%);
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(220, 38, 38, 0.1) 0%, rgba(0, 0, 0, 0.3) 100%);
+    z-index: 1;
+}
+
+.welding-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.welding-hero .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.welding-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-feature i {
+    color: #FFA500;
+    font-size: 1.125rem;
+}
+
+/* Welding Intro Section */
+.welding-intro-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.intro-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.intro-text h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.intro-text .lead {
+    font-size: 1.125rem;
+    color: var(--stargas-gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.intro-text p {
+    color: var(--stargas-gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.phone-link {
+    color: var(--stargas-red);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+}
+
+.cylinder-sizes h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.sizes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.size-card {
+    background: var(--stargas-lightgray);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    border-left: 4px solid var(--stargas-red);
+    transition: var(--transition);
+}
+
+.size-card:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.size-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--stargas-red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+}
+
+.size-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.size-card p {
+    color: var(--stargas-gray);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.size-label {
+    display: inline-block;
+    background: var(--stargas-red);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+}
+
+/* Welding Products Section */
+.welding-products-section {
+    padding: 5rem 0;
+    background: var(--stargas-lightgray);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--stargas-darkgray);
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--stargas-gray);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+    background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.gas-cylinder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cylinder-body {
+    width: 80px;
+    height: 140px;
+    border-radius: 8px 8px 4px 4px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+
+.cylinder-body.argon {
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+.cylinder-body.mixed-welding {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+}
+
+.gas-label {
+    color: white;
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.product-type {
+    color: var(--stargas-gray);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.product-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.product-features li {
+    padding: 0.25rem 0;
+    color: var(--stargas-gray);
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 1.25rem;
+}
+
+.product-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--stargas-red);
+    font-weight: bold;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.availability {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.availability.in-stock {
+    color: #059669;
+}
+
+.availability i {
+    font-size: 1rem;
+}
+
+/* Why Choose Section */
+.why-choose-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.why-choose-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--stargas-darkgray);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--stargas-lightgray);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background: white;
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--stargas-red);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--stargas-darkgray);
+}
+
+.benefit-card p {
+    color: var(--stargas-gray);
+    line-height: 1.6;
+}
+
+/* Welding CTA Section */
+.welding-cta-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--stargas-red) 0%, var(--stargas-red-dark) 100%);
+    color: white;
+}
+
+.cta-content {
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: var(--stargas-red);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .welding-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .intro-content {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+    
+    .intro-text h2 {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}

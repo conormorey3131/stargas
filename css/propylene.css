@@ -1,0 +1,798 @@
+/* Propylene Hero Section */
+.propylene-hero {
+    position: relative;
+    min-height: 60vh;
+    background: linear-gradient(135deg, #059669 0%, #047857 50%, #065F46 100%);
+    display: flex;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+    z-index: 1;
+}
+
+.clean-flames {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.clean-flame {
+    position: absolute;
+    width: 30px;
+    height: 50px;
+    background: linear-gradient(to top, #10B981 0%, #34D399 50%, #6EE7B7 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: cleanFlicker 3s ease-in-out infinite alternate;
+    opacity: 0.7;
+}
+
+.flame-1 {
+    top: 20%;
+    left: 15%;
+    animation-delay: 0s;
+}
+
+.flame-2 {
+    top: 60%;
+    left: 25%;
+    animation-delay: 0.5s;
+}
+
+.flame-3 {
+    top: 30%;
+    right: 20%;
+    animation-delay: 1s;
+}
+
+.flame-4 {
+    top: 70%;
+    right: 30%;
+    animation-delay: 1.5s;
+}
+
+.flame-5 {
+    top: 45%;
+    left: 50%;
+    animation-delay: 2s;
+}
+
+@keyframes cleanFlicker {
+    0% {
+        transform: scale(1) rotate(-2deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.2) rotate(2deg);
+        opacity: 1;
+    }
+}
+
+.propylene-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.propylene-hero .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.propylene-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    font-weight: 400;
+    margin-bottom: 2rem;
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.hero-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.75rem 1.25rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.hero-feature i {
+    color: #6EE7B7;
+    font-size: 1.125rem;
+}
+
+/* Propylene Intro Section */
+.propylene-intro-section {
+    padding: 5rem 0;
+    background: white;
+}
+
+.intro-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.intro-text h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--stargas-darkgray);
+    text-align: center;
+}
+
+.intro-text .lead {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--stargas-gray);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.intro-text p {
+    color: var(--stargas-gray);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Cost Comparison */
+.cost-comparison {
+    background: var(--stargas-lightgray);
+    padding: 2rem;
+    border-radius: var(--radius);
+    margin: 3rem 0;
+    text-align: center;
+}
+
+.cost-comparison h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--stargas-darkgray);
+}
+
+.comparison-bars {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.comparison-item {
+    margin-bottom: 1.5rem;
+}
+
+.fuel-name {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.cost-bar {
+    height: 50px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.acetylene-bar {
+    background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
+    width: 100%;
+    animation: expandBar 2s ease-out;
+}
+
+.propylene-bar {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    width: 50%;
+    animation: expandBar 2s ease-out 0.5s both;
+}
+
+@keyframes expandBar {
+    from {
+        width: 0%;
+    }
+}
+
+.cost-label {
+    position: relative;
+    z-index: 2;
+}
+
+.contact-highlight {
+    background: var(--stargas-lightgray);
+    padding: 2rem;
+    border-radius: var(--radius);
+    text-align: center;
+    margin: 3rem 0;
+    border-left: 4px solid #059669;
+}
+
+.contact-highlight h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--stargas-darkgray);
+}
+
+.phone-link {
+    color: #059669;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.phone-link:hover {
+    text-decoration: underline;
+}
+
+.propylene-applications {
+    margin-top: 4rem;
+}
+
+.propylene-applications h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--stargas-darkgray);
+    text-align: center;
+}
+
+.applications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.app-card {
+    background: var(--stargas-lightgray);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.app-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background: white;
+}
+
+.app-icon {
+    width: 60px;
+    height: 60px;
+    background: #059669;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    transition: var(--transition);
+}
+
+.app-card:hover .app-icon {
+    background: #047857;
+    transform: scale(1.1);
+}
+
+.app-card h4 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.app-card p {
+    color: var(--stargas-gray);
+    font-size: 0.9rem;
+}
+
+/* Propylene Products Section */
+.propylene-products-section {
+    padding: 5rem 0;
+    background: var(--stargas-lightgray);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--stargas-darkgray);
+}
+
+.section-description {
+    font-size: 1.125rem;
+    color: var(--stargas-gray);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition);
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+    background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%);
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    position: relative;
+}
+
+.gas-cylinder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cylinder-body {
+    width: 70px;
+    height: 120px;
+    border-radius: 6px 6px 3px 3px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+
+/* Propylene Cylinder Colors */
+.cylinder-body.propylene-standard {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    width: 70px;
+    height: 120px;
+}
+
+.cylinder-body.propylene-heavy {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    width: 80px;
+    height: 140px;
+}
+
+.gas-label {
+    color: white;
+    font-weight: 800;
+    font-size: 0.875rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.clean-flame-small {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15px;
+    height: 25px;
+    background: linear-gradient(to top, #10B981 0%, #34D399 50%, #6EE7B7 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: cleanFlicker 2s ease-in-out infinite alternate;
+    opacity: 0.8;
+}
+
+.savings-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: var(--shadow-sm);
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-info h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--stargas-darkgray);
+}
+
+.product-type {
+    color: var(--stargas-gray);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.product-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+}
+
+.product-features li {
+    padding: 0.25rem 0;
+    color: var(--stargas-gray);
+    font-size: 0.875rem;
+    position: relative;
+    padding-left: 1.25rem;
+}
+
+.product-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #059669;
+    font-weight: bold;
+}
+
+.savings-note {
+    display: block;
+    color: #059669;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
+    font-style: italic;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.availability {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.availability.in-stock {
+    color: #059669;
+}
+
+.availability i {
+    font-size: 1rem;
+}
+
+/* Why Choose Propylene Section */
+.why-choose-propylene {
+    padding: 5rem 0;
+    background: white;
+}
+
+.why-choose-propylene h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--stargas-darkgray);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 2rem;
+    background: var(--stargas-lightgray);
+    border-radius: var(--radius);
+    transition: var(--transition);
+}
+
+.benefit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    background: white;
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: #059669;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem;
+    transition: var(--transition);
+}
+
+.benefit-card:hover .benefit-icon {
+    background: #047857;
+    transform: scale(1.1);
+}
+
+.benefit-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--stargas-darkgray);
+}
+
+.benefit-card p {
+    color: var(--stargas-gray);
+    line-height: 1.6;
+}
+
+/* Fuel Comparison Section */
+.fuel-comparison {
+    padding: 4rem 0;
+    background: var(--stargas-darkgray);
+    color: white;
+}
+
+.fuel-comparison h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.comparison-table {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.comparison-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    background: rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.comparison-header > div {
+    padding: 1rem;
+    text-align: center;
+}
+
+.comparison-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparison-row > div {
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.feature-col {
+    font-weight: 600;
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
+
+.propylene-col {
+    background: rgba(5, 150, 105, 0.2);
+}
+
+.acetylene-col {
+    background: rgba(220, 38, 38, 0.2);
+}
+
+.text-green {
+    color: #10B981;
+}
+
+.text-red {
+    color: #EF4444;
+}
+
+.text-amber {
+    color: #F59E0B;
+}
+
+/* Propylene CTA Section */
+.propylene-cta-section {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    color: white;
+}
+
+.cta-content {
+    text-align: center;
+}
+
+.cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.cta-content p {
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #059669;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .propylene-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .intro-text h2 {
+        font-size: 2rem;
+    }
+    
+    .comparison-bars {
+        max-width: 100%;
+    }
+    
+    .applications-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-header,
+    .comparison-row {
+        grid-template-columns: 1.5fr 1fr 1fr;
+        font-size: 0.875rem;
+    }
+    
+    .comparison-header > div,
+    .comparison-row > div {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Animation for product cards */
+.product-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Savings animation */
+@keyframes savingsGlow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+    }
+}
+
+.savings-badge {
+    animation: savingsGlow 2s ease-in-out infinite;
+}
