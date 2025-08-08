@@ -134,31 +134,53 @@
                     </a>
                     
                     <div class="nav-menu" id="navMenu">
-                        <a href="#home" class="nav-link">Home</a>
-                        <a href="#about" class="nav-link">About Us</a>
-                        <a href="beer-gas.html" class="nav-link">Beer & Cellar Gas</a>
-                        <a href="welding-gas.html" class="nav-link">Welding Gas</a>
-                        <a href="propane-gas.html" class="nav-link">Propane & Butane</a>
-                        <a href="helium.html" class="nav-link">Helium</a>
-                        <a href="industrial-oxygen.html" class="nav-link">Industrial Oxygen</a>
-                        <a href="propylene.html" class="nav-link">Propylene</a>
-                        <a href="nitrogen.html" class="nav-link">Nitrogen</a>
-                        <a href="store-locator.html" class="nav-link">Stockist Locator</a>
-                        <a href="contact.html" class="nav-link">Contact</a>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link has-dropdown">Gas Types</a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-header">Industrial Gases</div>
+                                <a href="propane-gas.html" class="dropdown-item">
+                                    <i class="fas fa-fire"></i>
+                                    Propane & Butane
+                                </a>
+                                <a href="welding-gas.html" class="dropdown-item">
+                                    <i class="fas fa-tools"></i>
+                                    Welding Gas
+                                </a>
+                                <a href="nitrogen.html" class="dropdown-item">
+                                    <i class="fas fa-flask"></i>
+                                    Nitrogen
+                                </a>
+                                <a href="industrial-oxygen.html" class="dropdown-item">
+                                    <i class="fas fa-lungs"></i>
+                                    Industrial Oxygen
+                                </a>
+                                <a href="propylene.html" class="dropdown-item">
+                                    <i class="fas fa-industry"></i>
+                                    Propylene
+                                </a>
+                                <div class="dropdown-header">Specialty Gases</div>
+                                <a href="beer-gas.html" class="dropdown-item">
+                                    <i class="fas fa-beer"></i>
+                                    Beer & Cellar Gas
+                                </a>
+                                <a href="helium.html" class="dropdown-item">
+                                    <i class="fas fa-balloons"></i>
+                                    Helium
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <a href="store-locator.html" class="nav-link">Store Locator</a>
+                        </div>
+                        <div class="nav-item">
+                            <a href="contact.html" class="nav-link">Contact</a>
+                        </div>
                     </div>
                     
                     <div class="nav-actions">
-                        <div class="currency-toggle">
-                            <button class="currency-btn active" data-currency="EUR" aria-label="Switch to Euro">
-                                <i class="fas fa-euro-sign"></i> EUR
-                            </button>
-                            <button class="currency-btn" data-currency="GBP" aria-label="Switch to British Pound">
-                                <i class="fas fa-pound-sign"></i> GBP
-                            </button>
-                        </div>
-                        <button class="btn btn-primary nav-cta" onclick="window.location.href='store-locator.html'">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Find a Stockist
+                        <button class="btn btn-primary nav-cta" onclick="window.location.href='tel:+35363207000'">
+                            <i class="fas fa-phone"></i>
+                            Call Us
                         </button>
                     </div>
                     
@@ -182,32 +204,44 @@
                 </button>
             </div>
             <div class="mobile-menu-links">
-                <a href="#home" class="mobile-menu-link">Home</a>
-                <a href="#about" class="mobile-menu-link">About Us</a>
-                <a href="beer-gas.html" class="mobile-menu-link">Beer & Cellar Gas</a>
-                <a href="welding-gas.html" class="mobile-menu-link">Welding Gas</a>
-                <a href="propane-gas.html" class="mobile-menu-link">Propane & Butane</a>
-                <a href="helium.html" class="mobile-menu-link">Helium</a>
-                <a href="industrial-oxygen.html" class="mobile-menu-link">Industrial Oxygen</a>
-                <a href="propylene.html" class="mobile-menu-link">Propylene</a>
-                <a href="nitrogen.html" class="mobile-menu-link">Nitrogen</a>
-                <a href="store-locator.html" class="mobile-menu-link">Stockist Locator</a>
-                <a href="contact.html" class="mobile-menu-link">Contact</a>
-                <div class="mobile-currency-toggle">
-                    <label for="mobileCurrency">Currency:</label>
-                    <div class="mobile-currency-buttons">
-                        <button class="mobile-currency-btn active" data-currency="EUR">
-                            <i class="fas fa-euro-sign"></i> EUR
-                        </button>
-                        <button class="mobile-currency-btn" data-currency="GBP">
-                            <i class="fas fa-pound-sign"></i> GBP
-                        </button>
-                    </div>
+                <div class="mobile-menu-section">
+                    <h4>Gas Types</h4>
+                    <a href="propane-gas.html" class="mobile-menu-link">
+                        <i class="fas fa-fire"></i> Propane & Butane
+                    </a>
+                    <a href="welding-gas.html" class="mobile-menu-link">
+                        <i class="fas fa-tools"></i> Welding Gas
+                    </a>
+                    <a href="nitrogen.html" class="mobile-menu-link">
+                        <i class="fas fa-flask"></i> Nitrogen
+                    </a>
+                    <a href="industrial-oxygen.html" class="mobile-menu-link">
+                        <i class="fas fa-lungs"></i> Industrial Oxygen
+                    </a>
+                    <a href="propylene.html" class="mobile-menu-link">
+                        <i class="fas fa-industry"></i> Propylene
+                    </a>
+                    <a href="beer-gas.html" class="mobile-menu-link">
+                        <i class="fas fa-beer"></i> Beer & Cellar Gas
+                    </a>
+                    <a href="helium.html" class="mobile-menu-link">
+                        <i class="fas fa-balloons"></i> Helium
+                    </a>
                 </div>
-                <button class="btn btn-primary btn-block" onclick="window.location.href='store-locator.html'">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Find a Stockist
-                </button>
+                <div class="mobile-menu-section">
+                    <a href="store-locator.html" class="mobile-menu-link">
+                        <i class="fas fa-map-marker-alt"></i> Store Locator
+                    </a>
+                    <a href="contact.html" class="mobile-menu-link">
+                        <i class="fas fa-envelope"></i> Contact
+                    </a>
+                </div>
+                <div class="mobile-cta-section">
+                    <button class="btn btn-primary btn-block" onclick="window.location.href='tel:+35363207000'">
+                        <i class="fas fa-phone"></i>
+                        Call Us Now
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -218,18 +252,23 @@
         <div class="hero-background"></div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title animate-fade-up">
+                <div class="hero-badge animate-fade-up">
+                    <i class="fas fa-star"></i>
+                    <span>Established 2010</span>
+                </div>
+                <h1 class="hero-title animate-fade-up-delay">
                     Ireland's No. 1 <span class="text-primary">RENT FREE</span> Industrial Gas Suppliers
                 </h1>
-                <p class="hero-description animate-fade-up-delay">
-                    Ireland's trusted energy partner, delivering quality fuel and exceptional service at every stop.
+                <p class="hero-description animate-fade-up-delay-2">
+                    Premium industrial gas solutions delivered through Ireland's most trusted network. Quality guaranteed, rent-free cylinders, exceptional service.
                 </p>
-                <div class="hero-buttons animate-fade-up-delay-2">
-                    <button class="btn btn-primary btn-lg" onclick="window.location.href='store-locator.html'">
-                        <i class="fas fa-map-marker-alt"></i>
-                        Find Nearest Stockist
+                <div class="hero-buttons animate-fade-up-delay-3">
+                    <button class="btn btn-primary btn-xl" onclick="window.location.href='tel:+35363207000'">
+                        <i class="fas fa-phone"></i>
+                        Call 063 20700
                     </button>
-                    <button class="btn btn-outline btn-lg" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                    <button class="btn btn-outline btn-xl" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+                        <i class="fas fa-arrow-down"></i>
                         Learn More
                     </button>
                 </div>
@@ -374,242 +413,8 @@
         </div>
     </section>
 
-    <!-- Leading Gas Suppliers Section -->
-    <section class="leading-suppliers">
-        <div class="container">
-            <div class="suppliers-content">
-                <div class="suppliers-text animate-on-scroll">
-                    <h2>Leading Gas Suppliers</h2>
-                    <p class="lead">We are a leading supplier of Propane, Butane, patio gas, BBQ gas, helium for balloons, beer and cellar gas, argon TIG gas, MIG gas, welding gases as well as nitrogen gas bottles and nitrogen cylinders. We supply bottled gases via our large stockist network throughout Ireland.</p>
-                    
-                    <div class="supplier-highlights">
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <h3>Safety First</h3>
-                            <p>Safety is critically assessed here at Stargas. All of our bottles and cylinders are regularly tested and maintained to exceed the regular industrial standards.</p>
-                        </div>
-                        
-                        <div class="highlight-card">
-                            <div class="highlight-icon">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <h3>Industrial Excellence</h3>
-                            <p>Our industrial experience has helped us develop our organisation as a whole and the exemplary services here justify why we are a highly regarded gas supplier in Ireland.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="gas-types animate-on-scroll">
-                    <h3>Our Gas Products</h3>
-                    <div class="gas-grid">
-                        <div class="gas-item">
-                            <i class="fas fa-fire"></i>
-                            <span>Propane & Butane</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-utensils"></i>
-                            <span>Patio & BBQ Gas</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-balloons"></i>
-                            <span>Helium for Balloons</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-beer"></i>
-                            <span>Beer & Cellar Gas</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-tools"></i>
-                            <span>Argon TIG & MIG Gas</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-industry"></i>
-                            <span>Welding Gases</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-flask"></i>
-                            <span>Nitrogen Gas</span>
-                        </div>
-                        <div class="gas-item">
-                            <i class="fas fa-network-wired"></i>
-                            <span>Stockist Network</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Click & Collect Section -->
-    <section class="click-collect">
-        <div class="container">
-            <div class="click-collect-content">
-                <div class="click-collect-header animate-on-scroll">
-                    <h2>CLICK & COLLECT</h2>
-                    <p class="lead">Buy online and collect in our Stargas Agents, free of charge. Combine the convenience of Shopping Online with the added bonus of being able to collect your order in a store near you, for free. Click and Collect ensures your order is ready and waiting for you when you arrive in-store.</p>
-                </div>
-                
-                <div class="collect-steps">
-                    <div class="step-item animate-on-scroll">
-                        <div class="step-number">1</div>
-                        <div class="step-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <h3>Order Products Online</h3>
-                        <p>Add products to your basket and proceed to the checkout.</p>
-                    </div>
-                    
-                    <div class="step-item animate-on-scroll">
-                        <div class="step-number">2</div>
-                        <div class="step-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <h3>Select your nearest stockist</h3>
-                        <p>Login to your account and select your nearest stockist.</p>
-                    </div>
-                    
-                    <div class="step-item animate-on-scroll">
-                        <div class="step-number">3</div>
-                        <div class="step-icon">
-                            <i class="fas fa-credit-card"></i>
-                        </div>
-                        <h3>Submit Payment</h3>
-                        <p>Accept Stargas Terms & Conditions and confirm order.</p>
-                    </div>
-                    
-                    <div class="step-item animate-on-scroll">
-                        <div class="step-number">4</div>
-                        <div class="step-icon">
-                            <i class="fas fa-handshake"></i>
-                        </div>
-                        <h3>Collect your order</h3>
-                        <p>Collect your order from your nearest stockist.</p>
-                    </div>
-                </div>
-                
-                <div class="collect-cta animate-on-scroll">
-                    <button class="btn btn-primary btn-lg">
-                        <i class="fas fa-shopping-bag"></i>
-                        Start Shopping Online
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Cylinder Testing Services -->
-    <section class="cylinder-testing">
-        <div class="container">
-            <div class="testing-content">
-                <div class="testing-text animate-on-scroll">
-                    <h2>Professional Cylinder Testing Services</h2>
-                    <p>Safety is our top priority. Our certified cylinder testing ensures your gas bottles meet all safety standards and regulations. We provide comprehensive testing, inspection, and certification services for all types of gas cylinders.</p>
-                    
-                    <div class="testing-features">
-                        <div class="feature-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <div>
-                                <h4>Certified Testing</h4>
-                                <p>Professional testing by qualified engineers</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-certificate"></i>
-                            <div>
-                                <h4>Full Compliance</h4>
-                                <p>Meets all Irish and EU safety regulations</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Quick Turnaround</h4>
-                                <p>Fast, reliable service to minimize downtime</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="testing-cta">
-                        <a href="https://cylindertestingservices.ie/" target="_blank" rel="noopener" class="btn btn-primary btn-lg">
-                            <i class="fas fa-external-link-alt"></i>
-                            Visit Cylinder Testing Services
-                        </a>
-                        <p class="cta-subtitle">Professional testing for your peace of mind</p>
-                    </div>
-                </div>
-                
-                <div class="testing-visual animate-on-scroll">
-                    <div class="visual-container">
-                        <div class="cylinder-icon">
-                            <i class="fas fa-gas-pump"></i>
-                        </div>
-                        <div class="safety-badge">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Safety Certified</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Store Locator Preview -->
-    <section class="store-locator-preview">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title animate-on-scroll">Find Your Nearest Stockist</h2>
-                <p class="section-description animate-on-scroll">Locate authorized Stargas stockists near you with our interactive locator</p>
-            </div>
-            
-            <div class="store-locator-content animate-on-scroll">
-                <div class="store-search">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search by location..." class="search-input">
-                    </div>
-                    <button class="btn btn-outline">
-                        <i class="fas fa-location-arrow"></i>
-                        Use My Location
-                    </button>
-                </div>
-                
-                <div class="featured-stores">
-                    <div class="store-card">
-                        <h4>Paddys Tool Store</h4>
-                        <p class="stockist-type">Hardware & Tools</p>
-                        <p>Main Street, Ennis, Co. Clare</p>
-                        <div class="store-info">
-                            <span><i class="fas fa-clock"></i> Mon-Sat</span>
-                        </div>
-                        <div class="store-services">
-                            <i class="fas fa-shopping-bag" title="Shop"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="store-card">
-                        <h4>Faha Fuels</h4>
-                        <p class="stockist-type">Fuel & Energy Supplier</p>
-                        <p>Faha, Kilmallock, Co. Limerick</p>
-                        <div class="store-info">
-                            <span><i class="fas fa-clock"></i> Mon-Sat</span>
-                        </div>
-                        <div class="store-services">
-                            <i class="fas fa-gas-pump" title="Fuel"></i>
-                            <i class="fas fa-shopping-bag" title="Shop"></i>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="store-locator-cta">
-                    <a href="store-locator.html" class="btn btn-primary btn-lg">
-                        View All Locations
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Want To Know More Section -->
     <section class="want-to-know-more" id="contact">
@@ -682,18 +487,17 @@
                         <li><a href="industrial-oxygen.html">Industrial Oxygen</a></li>
                         <li><a href="propylene.html">Propylene</a></li>
                         <li><a href="nitrogen.html">Nitrogen</a></li>
-                        <li><a href="store-locator.html">Find Stockists</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
                     <h3>Company</h3>
                     <ul>
-                        <li><a href="#about">About</a></li>
+                        <li><a href="index.html#about">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#safety">Safety</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="store-locator.html">Store Locator</a></li>
+                        <li><a href="tel:+35363207000">Call Us</a></li>
+                        <li><a href="mailto:sales@stargas.ie">Email Us</a></li>
                     </ul>
                 </div>
                 
@@ -726,5 +530,6 @@
     </main>
     
     <script src="js/main.js"></script>
+    <script src="js/chatbot.js"></script>
 </body>
 </html>

@@ -3,405 +3,549 @@ class StoreLocator {
     constructor() {
         this.map = null;
         this.markers = [];
-        this.userLocation = null;
+        this.filteredStores = [...storeData];
+        this.currentPosition = null;
         this.selectedStore = null;
-        this.currentFilters = {
-            services: ['fuel'], // Default to fuel stations
-            maxDistance: 10,
-            searchTerm: ''
-        };
         
         this.init();
     }
     
     init() {
-        this.initMap();
-        this.initEventListeners();
+        this.initializeMap();
+        this.bindEvents();
         this.renderStores();
+        this.addAllMarkers();
+        this.requestLocation();
     }
     
-    initMap() {
-        // Initialize Leaflet map centered on Dublin
-        this.map = L.map('map').setView([53.3498, -6.2603], 7);
+    initializeMap() {
+        // Initialize the map centered on Ireland
+        this.map = L.map('map').setView([53.1424, -7.6921], 7);
         
-        // Add tile layer
+        // Add OpenStreetMap tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 19
         }).addTo(this.map);
         
-        // Add custom controls
-        this.initMapControls();
+        // Custom control for fullscreen
+        this.addCustomControls();
     }
     
-    initMapControls() {
-        const zoomInBtn = document.getElementById('zoomInBtn');
-        const zoomOutBtn = document.getElementById('zoomOutBtn');
-        const centerMapBtn = document.getElementById('centerMapBtn');
-        
-        zoomInBtn.addEventListener('click', () => {
+    addCustomControls() {
+        // Zoom controls
+        document.getElementById('zoomInBtn').addEventListener('click', () => {
             this.map.zoomIn();
         });
         
-        zoomOutBtn.addEventListener('click', () => {
+        document.getElementById('zoomOutBtn').addEventListener('click', () => {
             this.map.zoomOut();
         });
         
-        centerMapBtn.addEventListener('click', () => {
-            if (this.userLocation) {
-                this.map.setView([this.userLocation.lat, this.userLocation.lng], 12);
+        // Fullscreen toggle
+        const fullscreenBtn = document.getElementById('fullscreenBtn');
+        let isFullscreen = false;
+        
+        fullscreenBtn.addEventListener('click', () => {
+            const mapContainer = document.querySelector('.map-container');
+            
+            if (!isFullscreen) {
+                mapContainer.classList.add('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+                isFullscreen = true;
+            } else {
+                mapContainer.classList.remove('fullscreen');
+                fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                isFullscreen = false;
             }
+            
+            // Trigger map resize after fullscreen toggle
+            setTimeout(() => {
+                this.map.invalidateSize();
+            }, 100);
         });
     }
     
-    initEventListeners() {
-        // Search input
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('input', (e) => {
-            this.currentFilters.searchTerm = e.target.value;
-            this.renderStores();
+    bindEvents() {
+        // Search functionality
+        const searchInput = document.getElementById('locationSearch');
+        const searchBtn = document.getElementById('searchBtn');
+        const locateBtn = document.getElementById('locateBtn');
+        
+        searchBtn.addEventListener('click', () => this.performSearch());
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.performSearch();
+            }
         });
         
-        // Use location button
-        const useLocationBtn = document.getElementById('useLocationBtn');
-        useLocationBtn.addEventListener('click', () => {
-            this.getUserLocation();
-        });
+        locateBtn.addEventListener('click', () => this.requestLocation());
         
-        // Service filter checkboxes
-        const filterCheckboxes = document.querySelectorAll('.filter-checkbox input[type="checkbox"]');
+        // Filter checkboxes
+        const filterCheckboxes = document.querySelectorAll('input[name="service"]');
         filterCheckboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                this.updateServiceFilters();
-                this.renderStores();
+            checkbox.addEventListener('change', () => this.applyFilters());
+        });
+        
+        // View toggle
+        const viewBtns = document.querySelectorAll('.view-btn');
+        viewBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                viewBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                this.toggleView(e.target.dataset.view);
             });
         });
-        
-        // Distance filter
-        const distanceSelect = document.getElementById('distanceSelect');
-        distanceSelect.addEventListener('change', (e) => {
-            this.currentFilters.maxDistance = parseInt(e.target.value);
-            this.renderStores();
-        });
-        
-        // Popup close
-        const popupClose = document.getElementById('popupClose');
-        popupClose.addEventListener('click', () => {
-            this.hideStoreDetails();
-        });
     }
     
-    updateServiceFilters() {
-        const checkedServices = [];
-        const filterCheckboxes = document.querySelectorAll('.filter-checkbox input[type="checkbox"]:checked');
-        filterCheckboxes.forEach(checkbox => {
-            checkedServices.push(checkbox.value);
-        });
-        this.currentFilters.services = checkedServices;
-    }
-    
-    getUserLocation() {
-        const btn = document.getElementById('useLocationBtn');
-        const originalHTML = btn.innerHTML;
+    performSearch() {
+        const query = document.getElementById('locationSearch').value.trim().toLowerCase();
+        if (!query) return;
         
-        if (!navigator.geolocation) {
-            alert('Geolocation is not supported by your browser');
-            return;
+        const filtered = storeData.filter(store => 
+            store.city.toLowerCase().includes(query) ||
+            store.county.toLowerCase().includes(query) ||
+            store.address.toLowerCase().includes(query) ||
+            store.eircode.toLowerCase().includes(query) ||
+            store.name.toLowerCase().includes(query)
+        );
+        
+        this.filteredStores = filtered;
+        this.renderStores();
+        this.updateMapMarkers();
+        
+        if (filtered.length > 0) {
+            // Zoom to show all filtered results
+            const group = new L.featureGroup(this.markers);
+            this.map.fitBounds(group.getBounds().pad(0.1));
         }
         
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Getting location...';
+        // Show no results message if needed
+        if (filtered.length === 0) {
+            this.showNoResults('No stores found matching your search.');
+        }
+    }
+    
+    applyFilters() {
+        const activeFilters = [];
+        const filterCheckboxes = document.querySelectorAll('input[name="service"]:checked');
         
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                this.userLocation = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                
-                btn.innerHTML = '<i class="fas fa-check"></i> Location found';
-                
-                // Center map on user location
-                this.map.setView([this.userLocation.lat, this.userLocation.lng], 12);
-                
-                // Add user location marker
-                if (this.userMarker) {
-                    this.map.removeLayer(this.userMarker);
+        filterCheckboxes.forEach(checkbox => {
+            activeFilters.push(checkbox.value);
+        });
+        
+        if (activeFilters.length === 0) {
+            this.filteredStores = [...storeData];
+        } else {
+            this.filteredStores = storeData.filter(store => {
+                return activeFilters.every(filter => {
+                    switch (filter) {
+                        case '24hours':
+                            return store.is24Hours;
+                        case 'car-wash':
+                            return store.hasCarWash;
+                        case 'cafe':
+                            return store.hasCafe;
+                        case 'atm':
+                            return store.hasATM;
+                        default:
+                            return false;
+                    }
+                });
+            });
+        }
+        
+        this.renderStores();
+        this.updateMapMarkers();
+        
+        if (this.filteredStores.length === 0) {
+            this.showNoResults('No stores found matching your filters.');
+        }
+    }
+    
+    requestLocation() {
+        const locateBtn = document.getElementById('locateBtn');
+        const originalHTML = locateBtn.innerHTML;
+        locateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    this.currentPosition = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    
+                    this.calculateDistances();
+                    this.renderStores();
+                    
+                    // Add user location marker
+                    L.marker([this.currentPosition.lat, this.currentPosition.lng], {
+                        icon: L.divIcon({
+                            className: 'user-location-marker',
+                            html: '<div class="user-location-dot"></div>',
+                            iconSize: [20, 20],
+                            iconAnchor: [10, 10]
+                        })
+                    }).addTo(this.map).bindPopup('Your location');
+                    
+                    // Center map on user location
+                    this.map.setView([this.currentPosition.lat, this.currentPosition.lng], 10);
+                    
+                    locateBtn.innerHTML = originalHTML;
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                    locateBtn.innerHTML = originalHTML;
+                    this.showError('Unable to access your location. Please search manually.');
                 }
-                
-                this.userMarker = L.marker([this.userLocation.lat, this.userLocation.lng], {
-                    icon: L.icon({
-                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
-                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                        iconSize: [25, 41],
-                        iconAnchor: [12, 41],
-                        popupAnchor: [1, -34],
-                        shadowSize: [41, 41]
-                    })
-                }).addTo(this.map);
-                
-                this.userMarker.bindPopup('Your Location').openPopup();
-                
-                // Re-render stores with distance calculations
-                this.renderStores();
-                
-                setTimeout(() => {
-                    btn.disabled = false;
-                    btn.innerHTML = originalHTML;
-                }, 2000);
-            },
-            (error) => {
-                console.error('Error getting location:', error);
-                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Location access denied';
-                
-                setTimeout(() => {
-                    btn.disabled = false;
-                    btn.innerHTML = originalHTML;
-                }, 2000);
-            }
-        );
+            );
+        } else {
+            locateBtn.innerHTML = originalHTML;
+            this.showError('Geolocation is not supported by your browser.');
+        }
+    }
+    
+    calculateDistances() {
+        if (!this.currentPosition) return;
+        
+        this.filteredStores.forEach(store => {
+            store.distance = this.calculateDistance(
+                this.currentPosition.lat,
+                this.currentPosition.lng,
+                store.coordinates.lat,
+                store.coordinates.lng
+            );
+        });
+        
+        // Sort by distance
+        this.filteredStores.sort((a, b) => (a.distance || Infinity) - (b.distance || Infinity));
+    }
+    
+    calculateDistance(lat1, lng1, lat2, lng2) {
+        const R = 6371; // Radius of the Earth in km
+        const dLat = this.degreeToRadians(lat2 - lat1);
+        const dLng = this.degreeToRadians(lng2 - lng1);
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(this.degreeToRadians(lat1)) * Math.cos(this.degreeToRadians(lat2)) * 
+            Math.sin(dLng/2) * Math.sin(dLng/2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+    
+    degreeToRadians(deg) {
+        return deg * (Math.PI/180);
     }
     
     renderStores() {
-        const filteredStores = getFilteredStores(
-            this.userLocation,
-            this.currentFilters.maxDistance,
-            this.currentFilters.services,
-            this.currentFilters.searchTerm
-        );
+        const resultsContainer = document.getElementById('storeResults');
+        const resultsCount = document.getElementById('resultsCount');
         
-        this.renderStoreList(filteredStores);
-        this.renderStoreMarkers(filteredStores);
-        this.updateResultsCount(filteredStores.length);
-    }
-    
-    renderStoreList(stores) {
-        const storeList = document.getElementById('storeList');
+        resultsCount.textContent = `(${this.filteredStores.length} locations)`;
         
-        if (stores.length === 0) {
-            storeList.innerHTML = `
-                <div class="loading">
-                    <div>
-                        <i class="fas fa-search"></i>
-                        <p>No stores found matching your criteria</p>
-                    </div>
-                </div>
-            `;
+        if (this.filteredStores.length === 0) {
+            resultsContainer.innerHTML = '';
             return;
         }
         
-        storeList.innerHTML = stores.map(store => this.createStoreHTML(store)).join('');
+        resultsContainer.innerHTML = this.filteredStores.map(store => this.createStoreCard(store)).join('');
         
-        // Add click event listeners
-        const storeItems = storeList.querySelectorAll('.store-item');
-        storeItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                this.selectStore(stores[index]);
+        // Bind click events to store cards
+        const storeCards = resultsContainer.querySelectorAll('.store-card');
+        storeCards.forEach((card, index) => {
+            card.addEventListener('click', () => {
+                this.selectStore(this.filteredStores[index]);
             });
         });
     }
     
-    createStoreHTML(store) {
-        const servicesHTML = store.services.map(service => {
-            const config = serviceConfig[service];
-            return `<div class="service-badge ${service}" title="${config.label}">
-                        <i class="${config.icon}"></i>
-                    </div>`;
+    createStoreCard(store) {
+        const todayHours = this.getTodayHours(store);
+        const servicesHTML = store.services.slice(0, 4).map(service => {
+            const serviceInfo = serviceIcons[service];
+            return serviceInfo ? `
+                <span class="service-tag">
+                    <i class="${serviceInfo.icon}"></i>
+                    ${serviceInfo.label}
+                </span>
+            ` : '';
         }).join('');
         
-        const distanceHTML = store.distance !== null ? 
-            `<span class="store-distance">${store.distance.toFixed(1)} km</span>` : '';
-        
-        const stockistTypeHTML = store.stockistType ? 
-            `<div class="stockist-type">${store.stockistType}</div>` : '';
+        const distanceHTML = store.distance ? 
+            `<div class="store-distance">${store.distance.toFixed(1)} km away</div>` : '';
         
         return `
-            <div class="store-item" data-store-id="${store.id}">
-                <h4>${store.name}</h4>
-                ${stockistTypeHTML}
-                <div class="store-address">${store.address}, ${store.city}${store.county ? ', Co. ' + store.county : ''}</div>
-                <div class="store-info-row">
-                    <div class="store-hours">
-                        <i class="fas fa-clock"></i>
-                        ${store.hours}
+            <div class="store-card" data-store-id="${store.id}">
+                <div class="store-header">
+                    <div>
+                        <h3 class="store-name">${store.name}</h3>
+                        <p class="store-address">${store.address}, ${store.city}, ${store.county} ${store.eircode}</p>
                     </div>
                     ${distanceHTML}
                 </div>
+                
+                <div class="store-info">
+                    <div class="info-section">
+                        <h4>Contact</h4>
+                        <div class="contact-info">
+                            <a href="tel:${store.phone}">${store.phone}</a><br>
+                            ${store.email ? `<a href="mailto:${store.email}">${store.email}</a>` : ''}
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <h4>Hours Today</h4>
+                        <div class="hours-today ${todayHours.isOpen ? '' : 'closed'}">
+                            ${todayHours.hours}
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="store-services">
                     ${servicesHTML}
+                </div>
+                
+                <div class="store-actions">
+                    <a href="tel:${store.phone}" class="action-btn primary">
+                        <i class="fas fa-phone"></i>
+                        Call
+                    </a>
+                    <a href="https://maps.google.com/?q=${store.coordinates.lat},${store.coordinates.lng}" 
+                       target="_blank" rel="noopener" class="action-btn">
+                        <i class="fas fa-directions"></i>
+                        Directions
+                    </a>
                 </div>
             </div>
         `;
     }
     
-    renderStoreMarkers(stores) {
-        // Clear existing markers
-        this.markers.forEach(marker => this.map.removeLayer(marker));
-        this.markers = [];
+    getTodayHours(store) {
+        const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const today = days[new Date().getDay()];
+        const hours = store.openingHours[today];
         
-        // Add new markers
-        stores.forEach(store => {
+        if (hours === '24 Hours') {
+            return { hours: '24 Hours', isOpen: true };
+        }
+        
+        if (hours === 'Closed') {
+            return { hours: 'Closed', isOpen: false };
+        }
+        
+        // Check if currently open
+        const now = new Date();
+        const currentTime = now.getHours() * 60 + now.getMinutes();
+        
+        // Simple check - you might want to make this more sophisticated
+        return { hours: hours, isOpen: true };
+    }
+    
+    addAllMarkers() {
+        this.clearMarkers();
+        
+        this.filteredStores.forEach(store => {
             const marker = L.marker([store.coordinates.lat, store.coordinates.lng], {
-                icon: L.icon({
-                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
-                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                    shadowSize: [41, 41]
-                })
+                icon: this.createCustomIcon(store)
             }).addTo(this.map);
             
-            marker.bindPopup(`
-                <div style="text-align: center; min-width: 200px;">
-                    <h4 style="margin-bottom: 8px;">${store.name}</h4>
-                    <p style="margin-bottom: 8px; color: #666;">${store.address}<br>${store.city}</p>
-                    <button onclick="storeLocator.selectStore(storeData.find(s => s.id === ${store.id}))" 
-                            style="background: #DC2626; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">
-                        View Details
-                    </button>
-                </div>
-            `);
-            
-            marker.on('click', () => {
-                this.selectStore(store);
-            });
+            marker.bindPopup(this.createPopupContent(store));
+            marker.on('click', () => this.selectStore(store));
             
             this.markers.push(marker);
         });
+    }
+    
+    updateMapMarkers() {
+        this.clearMarkers();
+        this.addAllMarkers();
+    }
+    
+    clearMarkers() {
+        this.markers.forEach(marker => this.map.removeLayer(marker));
+        this.markers = [];
+    }
+    
+    createCustomIcon(store) {
+        const isSelected = this.selectedStore && this.selectedStore.id === store.id;
+        const iconClass = isSelected ? 'selected-marker' : 'store-marker';
         
-        // Fit map to show all markers if there are any
-        if (this.markers.length > 0) {
-            const group = new L.featureGroup(this.markers);
-            this.map.fitBounds(group.getBounds().pad(0.1));
-        }
+        return L.divIcon({
+            className: iconClass,
+            html: `
+                <div class="marker-pin ${store.is24Hours ? 'always-open' : ''}">
+                    <i class="fas fa-gas-pump"></i>
+                </div>
+            `,
+            iconSize: [30, 40],
+            iconAnchor: [15, 40],
+            popupAnchor: [0, -40]
+        });
+    }
+    
+    createPopupContent(store) {
+        const servicesHTML = store.services.slice(0, 3).map(service => {
+            const serviceInfo = serviceIcons[service];
+            return serviceInfo ? `
+                <span class="service-tag">
+                    <i class="${serviceInfo.icon}"></i>
+                    ${serviceInfo.label}
+                </span>
+            ` : '';
+        }).join('');
+        
+        return `
+            <div class="popup-content">
+                <h3 class="popup-store-name">${store.name}</h3>
+                <p class="popup-address">${store.address}, ${store.city}</p>
+                <div class="popup-services">${servicesHTML}</div>
+                <div class="popup-actions">
+                    <a href="tel:${store.phone}" class="popup-btn primary">Call</a>
+                    <a href="https://maps.google.com/?q=${store.coordinates.lat},${store.coordinates.lng}" 
+                       target="_blank" rel="noopener" class="popup-btn">Directions</a>
+                </div>
+            </div>
+        `;
     }
     
     selectStore(store) {
+        // Update selected store
         this.selectedStore = store;
         
-        // Update active state in list
-        document.querySelectorAll('.store-item').forEach(item => {
-            item.classList.remove('active');
+        // Update UI
+        document.querySelectorAll('.store-card').forEach(card => {
+            card.classList.remove('active');
         });
         
-        const storeItem = document.querySelector(`[data-store-id="${store.id}"]`);
-        if (storeItem) {
-            storeItem.classList.add('active');
+        const selectedCard = document.querySelector(`[data-store-id="${store.id}"]`);
+        if (selectedCard) {
+            selectedCard.classList.add('active');
+            selectedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
         
         // Center map on selected store
         this.map.setView([store.coordinates.lat, store.coordinates.lng], 15);
         
-        // Show store details popup
-        this.showStoreDetails(store);
+        // Update markers
+        this.updateMapMarkers();
+        
+        // Open popup
+        const marker = this.markers.find(m => 
+            m.getLatLng().lat === store.coordinates.lat && 
+            m.getLatLng().lng === store.coordinates.lng
+        );
+        if (marker) {
+            marker.openPopup();
+        }
     }
     
-    showStoreDetails(store) {
-        const popup = document.getElementById('storeDetailPopup');
-        const title = document.getElementById('popupTitle');
-        const address = document.getElementById('popupAddress');
-        const hours = document.getElementById('popupHours');
-        const phone = document.getElementById('popupPhone');
-        const services = document.getElementById('popupServices');
-        const getDirectionsBtn = document.getElementById('getDirectionsBtn');
-        const callStoreBtn = document.getElementById('callStoreBtn');
+    toggleView(view) {
+        const resultsList = document.getElementById('storeResults');
         
-        title.textContent = store.name;
-        address.textContent = `${store.address}, ${store.city}${store.county ? ', Co. ' + store.county : ''}`;
-        hours.textContent = store.hours;
-        phone.textContent = store.phone;
-        
-        // Clear any existing gas stock section
-        const existingGasStock = popup.querySelector('.gas-stock-section');
-        if (existingGasStock) {
-            existingGasStock.remove();
+        if (view === 'grid') {
+            resultsList.classList.add('grid-view');
+        } else {
+            resultsList.classList.remove('grid-view');
         }
-        
-        // Render services
-        services.innerHTML = store.services.map(service => {
-            const config = serviceConfig[service];
-            return `<div class="service-badge ${service}" title="${config.label}">
-                        <i class="${config.icon}"></i>
-                    </div>`;
-        }).join('');
-        
-        // Add gas stock information
-        const gasStockHTML = this.createGasStockHTML(store.gasStock);
-        if (gasStockHTML) {
-            services.insertAdjacentHTML('afterend', gasStockHTML);
-        }
-        
-        // Update action buttons
-        getDirectionsBtn.onclick = () => this.getDirections(store);
-        callStoreBtn.onclick = () => window.open(`tel:${store.phone}`);
-        
-        // Show popup
-        popup.style.display = 'block';
-        setTimeout(() => {
-            popup.classList.add('visible');
-        }, 10);
     }
     
-    createGasStockHTML(gasStock) {
-        if (!gasStock || Object.keys(gasStock).length === 0) return '';
-        
-        const gasStockItems = Object.entries(gasStock).map(([gasType, data]) => {
-            if (!data.available || !data.sizes || !data.stock) return '';
-            
-            const gasInfo = gasTypes[gasType];
-            if (!gasInfo) return '';
-            
-            const stockItems = data.sizes.map((size, index) => {
-                const stock = data.stock[index] || 0;
-                const stockStatus = stock > 5 ? 'in-stock' : stock > 0 ? 'low-stock' : 'out-of-stock';
-                return `<div class="stock-item ${stockStatus}">
-                    <span class="stock-size">${size}</span>
-                    <span class="stock-count">${stock}</span>
-                </div>`;
-            }).join('');
-            
-            return `<div class="gas-stock-item">
-                <div class="gas-header">
-                    <div class="gas-color" style="background-color: ${gasInfo.color}"></div>
-                    <span class="gas-name">${gasInfo.name}</span>
-                </div>
-                <div class="stock-sizes">
-                    ${stockItems}
-                </div>
-            </div>`;
-        }).filter(item => item).join('');
-        
-        return gasStockItems ? `
-            <div class="gas-stock-section">
-                <h4>Gas Stock Available</h4>
-                <div class="gas-stock-grid">
-                    ${gasStockItems}
-                </div>
+    showNoResults(message) {
+        const resultsContainer = document.getElementById('storeResults');
+        resultsContainer.innerHTML = `
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>No Results Found</h3>
+                <p>${message}</p>
             </div>
-        ` : '';
+        `;
     }
     
-    hideStoreDetails() {
-        const popup = document.getElementById('storeDetailPopup');
-        popup.classList.remove('visible');
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, 300);
-    }
-    
-    getDirections(store) {
-        const destination = `${store.coordinates.lat},${store.coordinates.lng}`;
-        const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
-        window.open(url, '_blank');
-    }
-    
-    updateResultsCount(count) {
-        const resultsCount = document.getElementById('resultsCount');
-        resultsCount.textContent = `${count} station${count !== 1 ? 's' : ''} found`;
+    showError(message) {
+        const resultsContainer = document.getElementById('storeResults');
+        resultsContainer.innerHTML = `
+            <div class="error-message">
+                <i class="fas fa-exclamation-triangle"></i>
+                ${message}
+            </div>
+        `;
     }
 }
 
-// Initialize store locator when DOM is loaded
+// Additional CSS for custom markers (to be added to store-locator.css)
+const markerStyles = `
+    .store-marker, .selected-marker, .user-location-marker {
+        border: none !important;
+        background: transparent !important;
+    }
+    
+    .marker-pin {
+        width: 30px;
+        height: 40px;
+        background: #dc2626;
+        border-radius: 50% 50% 50% 0;
+        transform: rotate(-45deg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s ease;
+    }
+    
+    .marker-pin i {
+        color: white;
+        font-size: 14px;
+        transform: rotate(45deg);
+    }
+    
+    .marker-pin.always-open {
+        background: #059669;
+    }
+    
+    .selected-marker .marker-pin {
+        background: #1e40af;
+        transform: rotate(-45deg) scale(1.2);
+        z-index: 1000;
+    }
+    
+    .user-location-dot {
+        width: 20px;
+        height: 20px;
+        background: #3b82f6;
+        border: 3px solid white;
+        border-radius: 50%;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+        70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    
+    .map-container.fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 9999;
+        border: none;
+    }
+    
+    .map-container.fullscreen .map {
+        height: 100vh !important;
+    }
+`;
+
+// Inject marker styles
+const styleSheet = document.createElement('style');
+styleSheet.textContent = markerStyles;
+document.head.appendChild(styleSheet);
+
+// Initialize store locator when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    window.storeLocator = new StoreLocator();
+    if (document.getElementById('map')) {
+        new StoreLocator();
+    }
 });

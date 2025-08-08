@@ -1,212 +1,206 @@
-// Gas stock data
-const gasTypes = {
-    propane: { name: 'Propane', sizes: ['9kg', '13kg', '19kg', '47kg'], color: '#FF6B35' },
-    butane: { name: 'Butane', sizes: ['7kg', '15kg'], color: '#4ECDC4' },
-    calor: { name: 'Calor Gas', sizes: ['6kg', '13kg', '19kg'], color: '#45B7D1' },
-    flogas: { name: 'Flogas', sizes: ['11kg', '21kg', '47kg'], color: '#96CEB4' },
-    acetylene: { name: 'Acetylene', sizes: ['1.8kg', '8kg'], color: '#FFEAA7' },
-    oxygen: { name: 'Oxygen', sizes: ['1.4m³', '2.3m³', '10m³'], color: '#DDA0DD' },
-    argon: { name: 'Argon', sizes: ['2.2m³', '5.7m³'], color: '#74B9FF' },
-    co2: { name: 'CO₂', sizes: ['3.7kg', '6.35kg'], color: '#FD79A8' },
-    helium: { name: 'Helium', sizes: ['0.25m³', '1.8m³'], color: '#FDCB6E' },
-    nitrogen: { name: 'Nitrogen', sizes: ['2.2m³', '10.9m³'], color: '#6C5CE7' }
-};
-
-// Store locations data - Stargas Stockists
+// Store data for Stargas locations across Ireland
 const storeData = [
     {
-        id: 1,
-        name: "Paddys Tool Store",
-        address: "Main Street",
-        city: "Ennis",
-        county: "Clare",
-        postal: "V95",
-        phone: "+353 65 682 8464",
-        coordinates: { lat: 52.8463, lng: -8.9817 },
-        hours: "Mon-Fri: 8:00 AM - 6:00 PM, Sat: 9:00 AM - 5:00 PM",
-        services: ["shop"],
-        stockistType: "Hardware & Tools",
-        gasStock: {
-            propane: { available: true, sizes: ['9kg', '13kg', '19kg', '47kg'], stock: [12, 10, 8, 4] },
-            butane: { available: true, sizes: ['7kg', '15kg'], stock: [8, 5] },
-            calor: { available: true, sizes: ['6kg', '13kg', '19kg'], stock: [10, 12, 7] },
-            flogas: { available: true, sizes: ['11kg', '21kg'], stock: [9, 6] }
+        id: '1',
+        name: 'Stargas Dublin City',
+        address: '123 O\'Connell Street',
+        city: 'Dublin',
+        county: 'Dublin',
+        eircode: 'D01 ABC1',
+        coordinates: { lat: 53.3498, lng: -6.2603 },
+        phone: '+353 1 234 5678',
+        email: 'dublin.city@stargas.ie',
+        openingHours: {
+            monday: '24 Hours',
+            tuesday: '24 Hours',
+            wednesday: '24 Hours',
+            thursday: '24 Hours',
+            friday: '24 Hours',
+            saturday: '24 Hours',
+            sunday: '24 Hours'
         },
-        distance: null
+        services: ['fuel', 'shop', 'car-wash', 'coffee', 'atm'],
+        amenities: ['Free WiFi', 'Parking', 'Disabled Access', 'Toilets'],
+        fuel_types: ['Petrol', 'Diesel', 'Premium Unleaded', 'AdBlue'],
+        manager: 'John O\'Sullivan',
+        established: 2018,
+        is24Hours: true,
+        hasCarWash: true,
+        hasShop: true,
+        hasCafe: true,
+        hasATM: true,
     },
     {
-        id: 2,
-        name: "Top Part",
-        address: "Shannon Industrial Estate",
-        city: "Shannon",
-        county: "Clare",
-        postal: "V14",
-        phone: "+353 61 471 632",
-        coordinates: { lat: 52.7036, lng: -8.8647 },
-        hours: "Mon-Fri: 8:00 AM - 5:30 PM, Sat: 9:00 AM - 1:00 PM",
-        services: ["shop"],
-        stockistType: "Auto Parts & Accessories",
-        gasStock: {
-            propane: { available: true, sizes: ['9kg', '13kg', '19kg'], stock: [15, 11, 9] },
-            butane: { available: true, sizes: ['7kg', '15kg'], stock: [10, 6] },
-            calor: { available: true, sizes: ['13kg'], stock: [14] },
-            acetylene: { available: true, sizes: ['1.8kg', '8kg'], stock: [6, 3] },
-            oxygen: { available: true, sizes: ['1.4m³', '2.3m³'], stock: [8, 5] }
+        id: '2',
+        name: 'Stargas Cork Central',
+        address: '456 Patrick Street',
+        city: 'Cork',
+        county: 'Cork',
+        eircode: 'T12 XYZ2',
+        coordinates: { lat: 51.8985, lng: -8.4756 },
+        phone: '+353 21 234 5678',
+        email: 'cork.central@stargas.ie',
+        openingHours: {
+            monday: '6:00 AM - 11:00 PM',
+            tuesday: '6:00 AM - 11:00 PM',
+            wednesday: '6:00 AM - 11:00 PM',
+            thursday: '6:00 AM - 11:00 PM',
+            friday: '6:00 AM - 12:00 AM',
+            saturday: '7:00 AM - 12:00 AM',
+            sunday: '8:00 AM - 10:00 PM'
         },
-        distance: null
+        services: ['fuel', 'shop', 'coffee', 'atm'],
+        amenities: ['Free WiFi', 'Parking', 'Disabled Access'],
+        fuel_types: ['Petrol', 'Diesel', 'Premium Unleaded'],
+        manager: 'Mary Murphy',
+        established: 2015,
+        is24Hours: false,
+        hasCarWash: false,
+        hasShop: true,
+        hasCafe: true,
+        hasATM: true,
     },
     {
-        id: 3,
-        name: "SWP",
-        address: "Dock Road",
-        city: "Limerick",
-        county: "Limerick",
-        postal: "V94",
-        phone: "+353 61 315 799",
-        coordinates: { lat: 52.6477, lng: -8.6234 },
-        hours: "Mon-Fri: 8:00 AM - 5:00 PM",
-        services: ["shop"],
-        stockistType: "Welding & Industrial Supplies",
-        gasStock: {
-            propane: { available: true, sizes: ['13kg', '19kg', '47kg'], stock: [20, 15, 8] },
-            butane: { available: true, sizes: ['7kg', '15kg'], stock: [12, 8] },
-            acetylene: { available: true, sizes: ['1.8kg', '8kg'], stock: [10, 6] },
-            oxygen: { available: true, sizes: ['1.4m³', '2.3m³', '10m³'], stock: [15, 10, 5] },
-            argon: { available: true, sizes: ['2.2m³', '5.7m³'], stock: [8, 4] },
-            co2: { available: true, sizes: ['3.7kg', '6.35kg'], stock: [12, 8] },
-            nitrogen: { available: true, sizes: ['2.2m³', '10.9m³'], stock: [6, 3] }
+        id: '3',
+        name: 'Stargas Galway Bay',
+        address: '789 Shop Street',
+        city: 'Galway',
+        county: 'Galway',
+        eircode: 'H91 DEF3',
+        coordinates: { lat: 53.2707, lng: -9.0568 },
+        phone: '+353 91 234 5678',
+        email: 'galway.bay@stargas.ie',
+        openingHours: {
+            monday: '24 Hours',
+            tuesday: '24 Hours',
+            wednesday: '24 Hours',
+            thursday: '24 Hours',
+            friday: '24 Hours',
+            saturday: '24 Hours',
+            sunday: '24 Hours'
         },
-        distance: null
+        services: ['fuel', 'shop', 'car-wash'],
+        amenities: ['Parking', 'Disabled Access', 'Toilets'],
+        fuel_types: ['Petrol', 'Diesel', 'Premium Unleaded', 'AdBlue'],
+        manager: 'Seán Kelly',
+        established: 2020,
+        is24Hours: true,
+        hasCarWash: true,
+        hasShop: true,
+        hasCafe: false,
+        hasATM: false,
     },
     {
-        id: 4,
-        name: "Top Part",
-        address: "Ballysimon Road",
-        city: "Limerick",
-        county: "Limerick",
-        postal: "V94",
-        phone: "+353 61 422 300",
-        coordinates: { lat: 52.6555, lng: -8.5784 },
-        hours: "Mon-Fri: 8:00 AM - 6:00 PM, Sat: 9:00 AM - 2:00 PM",
-        services: ["shop"],
-        stockistType: "Auto Parts & Accessories",
-        gasStock: {
-            propane: { available: true, sizes: ['9kg', '13kg', '19kg'], stock: [18, 14, 10] },
-            butane: { available: true, sizes: ['7kg', '15kg'], stock: [11, 7] },
-            calor: { available: true, sizes: ['6kg', '13kg'], stock: [9, 16] },
-            flogas: { available: true, sizes: ['11kg', '21kg'], stock: [10, 8] }
+        id: '4',
+        name: 'Stargas Limerick Junction',
+        address: '321 William Street',
+        city: 'Limerick',
+        county: 'Limerick',
+        eircode: 'V94 GHI4',
+        coordinates: { lat: 52.6638, lng: -8.6267 },
+        phone: '+353 61 234 5678',
+        email: 'limerick.junction@stargas.ie',
+        openingHours: {
+            monday: '5:00 AM - 11:00 PM',
+            tuesday: '5:00 AM - 11:00 PM',
+            wednesday: '5:00 AM - 11:00 PM',
+            thursday: '5:00 AM - 11:00 PM',
+            friday: '5:00 AM - 12:00 AM',
+            saturday: '6:00 AM - 12:00 AM',
+            sunday: '7:00 AM - 10:00 PM'
         },
-        distance: null
+        services: ['fuel', 'shop', 'coffee', 'car-wash', 'atm'],
+        amenities: ['Free WiFi', 'Parking', 'Disabled Access', 'Toilets', 'Electric Charging'],
+        fuel_types: ['Petrol', 'Diesel', 'Premium Unleaded', 'AdBlue', 'Electric'],
+        manager: 'Emma Walsh',
+        established: 2019,
+        is24Hours: false,
+        hasCarWash: true,
+        hasShop: true,
+        hasCafe: true,
+        hasATM: true,
     },
     {
-        id: 5,
-        name: "Faha Fuels",
-        address: "Faha",
-        city: "Kilmallock",
-        county: "Limerick",
-        postal: "V35",
-        phone: "+353 63 98 108",
-        coordinates: { lat: 52.4022, lng: -8.5772 },
-        hours: "Mon-Fri: 8:00 AM - 6:00 PM, Sat: 9:00 AM - 5:00 PM",
-        services: ["fuel", "shop"],
-        stockistType: "Fuel & Energy Supplier",
-        gasStock: {
-            propane: { available: true, sizes: ['9kg', '13kg', '19kg', '47kg'], stock: [25, 20, 15, 10] },
-            butane: { available: true, sizes: ['7kg', '15kg'], stock: [18, 12] },
-            calor: { available: true, sizes: ['6kg', '13kg', '19kg'], stock: [15, 22, 12] },
-            flogas: { available: true, sizes: ['11kg', '21kg', '47kg'], stock: [16, 12, 8] },
-            co2: { available: true, sizes: ['3.7kg', '6.35kg'], stock: [10, 6] }
+        id: '5',
+        name: 'Stargas Waterford Quay',
+        address: '654 The Quay',
+        city: 'Waterford',
+        county: 'Waterford',
+        eircode: 'X91 JKL5',
+        coordinates: { lat: 52.2593, lng: -7.1101 },
+        phone: '+353 51 234 5678',
+        email: 'waterford.quay@stargas.ie',
+        openingHours: {
+            monday: '6:00 AM - 10:00 PM',
+            tuesday: '6:00 AM - 10:00 PM',
+            wednesday: '6:00 AM - 10:00 PM',
+            thursday: '6:00 AM - 10:00 PM',
+            friday: '6:00 AM - 11:00 PM',
+            saturday: '7:00 AM - 11:00 PM',
+            sunday: '8:00 AM - 9:00 PM'
         },
-        distance: null
+        services: ['fuel', 'shop'],
+        amenities: ['Parking', 'Disabled Access'],
+        fuel_types: ['Petrol', 'Diesel', 'Premium Unleaded'],
+        manager: 'David Power',
+        established: 2017,
+        is24Hours: false,
+        hasCarWash: false,
+        hasShop: true,
+        hasCafe: false,
+        hasATM: false,
+    },
+    {
+        id: '6',
+        name: 'Stargas Kilkenny Castle',
+        address: '987 High Street',
+        city: 'Kilkenny',
+        county: 'Kilkenny',
+        eircode: 'R95 MNO6',
+        coordinates: { lat: 52.6541, lng: -7.2448 },
+        phone: '+353 56 234 5678',
+        email: 'kilkenny.castle@stargas.ie',
+        openingHours: {
+            monday: '7:00 AM - 9:00 PM',
+            tuesday: '7:00 AM - 9:00 PM',
+            wednesday: '7:00 AM - 9:00 PM',
+            thursday: '7:00 AM - 9:00 PM',
+            friday: '7:00 AM - 10:00 PM',
+            saturday: '8:00 AM - 10:00 PM',
+            sunday: '9:00 AM - 8:00 PM'
+        },
+        services: ['fuel', 'shop', 'coffee'],
+        amenities: ['Free WiFi', 'Parking', 'Disabled Access', 'Toilets'],
+        fuel_types: ['Petrol', 'Diesel', 'Premium Unleaded'],
+        manager: 'Aoife Ryan',
+        established: 2021,
+        is24Hours: false,
+        hasCarWash: false,
+        hasShop: true,
+        hasCafe: true,
+        hasATM: false,
     },
 ];
 
-// Service configurations
-const serviceConfig = {
-    fuel: {
-        icon: 'fas fa-gas-pump',
-        label: 'Fuel Station',
-        color: '#DC2626'
-    },
-    'ev-charging': {
-        icon: 'fas fa-charging-station',
-        label: 'EV Charging',
-        color: '#D97706'
-    },
-    'car-wash': {
-        icon: 'fas fa-car',
-        label: 'Car Wash',
-        color: '#2563EB'
-    },
-    shop: {
-        icon: 'fas fa-shopping-bag',
-        label: 'Convenience Store',
-        color: '#059669'
-    },
-    coffee: {
-        icon: 'fas fa-coffee',
-        label: 'Coffee Shop',
-        color: '#EA580C'
-    }
+// Service icons mapping
+const serviceIcons = {
+    fuel: { icon: 'fas fa-gas-pump', label: 'Fuel' },
+    shop: { icon: 'fas fa-shopping-bag', label: 'Shop' },
+    'car-wash': { icon: 'fas fa-car', label: 'Car Wash' },
+    coffee: { icon: 'fas fa-coffee', label: 'Coffee' },
+    atm: { icon: 'fas fa-credit-card', label: 'ATM' },
 };
 
-// Utility function to calculate distance between two coordinates
-function calculateDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371; // Radius of the Earth in km
-    const dLat = (lat2 - lat1) * Math.PI / 180;
-    const dLng = (lng2 - lng1) * Math.PI / 180;
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLng / 2) * Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
-}
-
-// Function to get stores within a certain distance and matching criteria
-function getFilteredStores(userCoords = null, maxDistance = 100, serviceFilters = [], searchTerm = '') {
-    let filteredStores = [...storeData];
-    
-    // Calculate distances if user coordinates are provided
-    if (userCoords) {
-        filteredStores = filteredStores.map(store => ({
-            ...store,
-            distance: calculateDistance(
-                userCoords.lat,
-                userCoords.lng,
-                store.coordinates.lat,
-                store.coordinates.lng
-            )
-        }));
-        
-        // Filter by distance
-        filteredStores = filteredStores.filter(store => store.distance <= maxDistance);
-        
-        // Sort by distance
-        filteredStores.sort((a, b) => a.distance - b.distance);
-    }
-    
-    // Filter by services
-    if (serviceFilters.length > 0) {
-        filteredStores = filteredStores.filter(store =>
-            serviceFilters.every(service => store.services.includes(service))
-        );
-    }
-    
-    // Filter by search term
-    if (searchTerm) {
-        const term = searchTerm.toLowerCase();
-        filteredStores = filteredStores.filter(store =>
-            store.name.toLowerCase().includes(term) ||
-            store.address.toLowerCase().includes(term) ||
-            store.city.toLowerCase().includes(term) ||
-            store.postal.toLowerCase().includes(term)
-        );
-    }
-    
-    return filteredStores;
-}
+// Amenity icons mapping
+const amenityIcons = {
+    'Free WiFi': { icon: 'fas fa-wifi', label: 'Free WiFi' },
+    'Parking': { icon: 'fas fa-parking', label: 'Parking' },
+    'Disabled Access': { icon: 'fas fa-wheelchair', label: 'Disabled Access' },
+    'Toilets': { icon: 'fas fa-restroom', label: 'Toilets' },
+    'Electric Charging': { icon: 'fas fa-bolt', label: 'Electric Charging' },
+};
 
 // Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { storeData, serviceConfig, getFilteredStores, calculateDistance };
+    module.exports = { storeData, serviceIcons, amenityIcons };
 }

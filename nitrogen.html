@@ -74,28 +74,47 @@
                     </a>
                     
                     <div class="nav-menu" id="navMenu">
-                        <a href="index.html" class="nav-link">Home</a>
-                        <a href="index.html#about" class="nav-link">About Us</a>
-                        <a href="beer-gas.html" class="nav-link">Beer & Cellar Gas</a>
-                        <a href="welding-gas.html" class="nav-link">Welding Gas</a>
-                        <a href="propane-gas.html" class="nav-link">Propane & Butane</a>
-                        <a href="helium.html" class="nav-link">Helium</a>
-                        <a href="industrial-oxygen.html" class="nav-link">Industrial Oxygen</a>
-                        <a href="propylene.html" class="nav-link">Propylene</a>
-                        <a href="nitrogen.html" class="nav-link active">Nitrogen</a>
-                        <a href="store-locator.html" class="nav-link">Stockist Locator</a>
-                        <a href="contact.html" class="nav-link">Contact</a>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link has-dropdown">Gas Types</a>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-header">Industrial Gases</div>
+                                <a href="propane-gas.html" class="dropdown-item">
+                                    <i class="fas fa-fire"></i>
+                                    Propane & Butane
+                                </a>
+                                <a href="welding-gas.html" class="dropdown-item">
+                                    <i class="fas fa-tools"></i>
+                                    Welding Gas
+                                </a>
+                                <a href="nitrogen.html" class="dropdown-item active">
+                                    <i class="fas fa-flask"></i>
+                                    Nitrogen
+                                </a>
+                                <a href="industrial-oxygen.html" class="dropdown-item">
+                                    <i class="fas fa-lungs"></i>
+                                    Industrial Oxygen
+                                </a>
+                                <a href="propylene.html" class="dropdown-item">
+                                    <i class="fas fa-industry"></i>
+                                    Propylene
+                                </a>
+                                <div class="dropdown-header">Specialty Gases</div>
+                                <a href="beer-gas.html" class="dropdown-item">
+                                    <i class="fas fa-beer"></i>
+                                    Beer & Cellar Gas
+                                </a>
+                                <a href="helium.html" class="dropdown-item">
+                                    <i class="fas fa-balloons"></i>
+                                    Helium
+                                </a>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <a href="store-locator.html" class="nav-link">Locations</a>
+                        </div>
                     </div>
                     
                     <div class="nav-actions">
-                        <div class="currency-toggle">
-                            <button class="currency-btn active" data-currency="EUR" aria-label="Switch to Euro">
-                                <i class="fas fa-euro-sign"></i> EUR
-                            </button>
-                            <button class="currency-btn" data-currency="GBP" aria-label="Switch to British Pound">
-                                <i class="fas fa-pound-sign"></i> GBP
-                            </button>
-                        </div>
                         <button class="btn btn-primary nav-cta" onclick="window.location.href='store-locator.html'">
                             <i class="fas fa-map-marker-alt"></i>
                             Find a Stockist
@@ -122,27 +141,38 @@
                 </button>
             </div>
             <div class="mobile-menu-links">
-                <a href="index.html" class="mobile-menu-link">Home</a>
-                <a href="index.html#about" class="mobile-menu-link">About Us</a>
-                <a href="beer-gas.html" class="mobile-menu-link">Beer & Cellar Gas</a>
-                <a href="welding-gas.html" class="mobile-menu-link">Welding Gas</a>
-                <a href="propane-gas.html" class="mobile-menu-link">Propane & Butane</a>
-                <a href="helium.html" class="mobile-menu-link">Helium</a>
-                <a href="industrial-oxygen.html" class="mobile-menu-link">Industrial Oxygen</a>
-                <a href="propylene.html" class="mobile-menu-link">Propylene</a>
-                <a href="nitrogen.html" class="mobile-menu-link active">Nitrogen</a>
-                <a href="store-locator.html" class="mobile-menu-link">Stockist Locator</a>
-                <a href="contact.html" class="mobile-menu-link">Contact</a>
-                <div class="mobile-currency-toggle">
-                    <label for="mobileCurrency">Currency:</label>
-                    <div class="mobile-currency-buttons">
-                        <button class="mobile-currency-btn active" data-currency="EUR">
-                            <i class="fas fa-euro-sign"></i> EUR
-                        </button>
-                        <button class="mobile-currency-btn" data-currency="GBP">
-                            <i class="fas fa-pound-sign"></i> GBP
-                        </button>
-                    </div>
+                <div class="mobile-menu-section">
+                    <h4>Gas Types</h4>
+                    <a href="propane-gas.html" class="mobile-menu-link">
+                        <i class="fas fa-fire"></i> Propane & Butane
+                    </a>
+                    <a href="welding-gas.html" class="mobile-menu-link">
+                        <i class="fas fa-tools"></i> Welding Gas
+                    </a>
+                    <a href="nitrogen.html" class="mobile-menu-link active">
+                        <i class="fas fa-flask"></i> Nitrogen
+                    </a>
+                    <a href="industrial-oxygen.html" class="mobile-menu-link">
+                        <i class="fas fa-lungs"></i> Industrial Oxygen
+                    </a>
+                    <a href="propylene.html" class="mobile-menu-link">
+                        <i class="fas fa-industry"></i> Propylene
+                    </a>
+                    <a href="beer-gas.html" class="mobile-menu-link">
+                        <i class="fas fa-beer"></i> Beer & Cellar Gas
+                    </a>
+                    <a href="helium.html" class="mobile-menu-link">
+                        <i class="fas fa-balloons"></i> Helium
+                    </a>
+                </div>
+                <a href="store-locator.html" class="mobile-menu-link">
+                    <i class="fas fa-map-marker-alt"></i> Locations
+                </a>
+                <div class="mobile-cta-section">
+                    <button class="btn btn-primary btn-block" onclick="window.location.href='store-locator.html'">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Find a Stockist
+                    </button>
                 </div>
             </div>
         </div>
@@ -673,9 +703,9 @@
                     <ul>
                         <li><a href="index.html#about">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a href="#safety">Safety</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
-                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="store-locator.html">Find Stockists</a></li>
+                        <li><a href="tel:+35363207000">Call Us</a></li>
+                        <li><a href="mailto:sales@stargas.ie">Email Us</a></li>
                     </ul>
                 </div>
                 
@@ -707,5 +737,6 @@
 
     <script src="js/main.js"></script>
     <script src="js/nitrogen.js"></script>
+    <script src="js/chatbot.js"></script>
 </body>
 </html>
