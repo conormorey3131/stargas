@@ -291,6 +291,12 @@ class StoreLocator {
                             ${todayHours.hours}
                         </div>
                     </div>
+                    <div class="info-section">
+                        <h4>Gas Stock Levels</h4>
+                        <div class="stock-levels">
+                            ${this.createStockDisplay(store.stock_quantities)}
+                        </div>
+                    </div>
                 </div>
                 
                 
@@ -328,6 +334,43 @@ class StoreLocator {
         
         // Simple check - you might want to make this more sophisticated
         return { hours: hours, isOpen: true };
+    }
+    
+    createStockDisplay(stockQuantities) {
+        if (!stockQuantities) return '<p>Stock information not available</p>';
+        
+        const gasNames = {
+            'propane_13kg': 'Propane 13kg',
+            'propane_47kg': 'Propane 47kg',
+            'butane_13kg': 'Butane 13kg',
+            'welding_oxygen': 'Welding Oxygen',
+            'welding_acetylene': 'Welding Acetylene',
+            'welding_argon': 'Welding Argon',
+            'nitrogen_industrial': 'Nitrogen',
+            'beer_gas': 'Beer Gas',
+            'helium_balloons': 'Helium'
+        };
+        
+        const statusColors = {
+            'good': '#22c55e',
+            'medium': '#f59e0b', 
+            'low': '#ef4444'
+        };
+        
+        return Object.entries(stockQuantities)
+            .map(([gasType, data]) => {
+                const name = gasNames[gasType] || gasType;
+                const color = statusColors[data.status] || '#64748b';
+                return `
+                    <div class="stock-item">
+                        <span class="gas-name">${name}</span>
+                        <span class="stock-quantity" style="color: ${color}">
+                            ${data.quantity} <span class="stock-status">(${data.status})</span>
+                        </span>
+                    </div>
+                `;
+            })
+            .join('');
     }
     
     addAllMarkers() {

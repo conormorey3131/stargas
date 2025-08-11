@@ -23,7 +23,7 @@ This is **Stargas Ireland** - a professional static HTML website for Ireland's l
 ### Key Features
 
 - **Responsive Design**: Mobile-first approach with professional breakpoints
-- **SEO Optimized**: Comprehensive meta tags, structured data (JSON-LD), and semantic HTML
+- **SEO Optimized**: Comprehensive meta tags, JSON-LD structured data (Organization, LocalBusiness), geographic targeting, and Open Graph integration
 - **Professional UI**: Modern design system with consistent spacing, typography, and color schemes
 - **Accessibility**: Keyboard navigation, focus management, ARIA attributes
 - **Interactive Elements**: Mobile menu, dropdown navigation, smooth scrolling, intersection observer animations
@@ -61,6 +61,12 @@ This project uses vanilla web technologies with no build tools, bundlers, or pac
 - Event delegation and performance optimizations
 - Intersection Observer for scroll animations
 
+### Chatbot Architecture
+- **AI Chatbot**: Implemented in `chatbot.js` as a class-based system with knowledge base
+- **Knowledge Management**: FAQ responses, keyword matching, and context-aware conversations
+- **Integration**: Embedded across all pages with consistent UI/UX
+- **Testing**: Use `test-chatbot.html` for functionality validation
+
 ### Code Style
 - Semantic HTML5 structure with proper accessibility attributes
 - BEM-inspired CSS naming where applicable
@@ -71,10 +77,25 @@ This project uses vanilla web technologies with no build tools, bundlers, or pac
 
 Since this is a static site with no build process:
 
+### Local Development
+```bash
+# Serve locally using Python (recommended for development)
+python -m http.server 8000
+# OR using Node.js
+npx http-server
+# OR using PHP
+php -S localhost:8000
+```
+
+### Development Workflow
 - **File Serving**: Open HTML files directly in browser or use a local server
 - **Development**: Edit files directly and refresh browser to see changes
 - **Deployment**: Upload all files to web server (maintaining directory structure)
-- **Testing**: Manual testing across browsers and devices
+
+### Testing
+- **Manual Testing**: Cross-browser testing across devices using `test-chatbot.html` for chatbot functionality
+- **SEO Testing**: Validate structured data using Google's Rich Results Test
+- **Performance**: Use browser DevTools for performance auditing
 
 ## Site Content Focus
 

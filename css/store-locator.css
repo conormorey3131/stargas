@@ -489,6 +489,70 @@
     }
 }
 
+/* Gas Stock Display */
+.stock-levels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.stock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.375rem 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.stock-item:last-child {
+    border-bottom: none;
+}
+
+.gas-name {
+    font-weight: 500;
+    color: #374151;
+}
+
+.stock-quantity {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.stock-status {
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.8;
+    text-transform: capitalize;
+}
+
+/* Stock status indicators */
+.stock-item[data-status="good"] .stock-quantity {
+    color: #22c55e;
+}
+
+.stock-item[data-status="medium"] .stock-quantity {
+    color: #f59e0b;
+}
+
+.stock-item[data-status="low"] .stock-quantity {
+    color: #ef4444;
+}
+
+/* Responsive adjustments for stock display */
+@media (max-width: 768px) {
+    .stock-levels {
+        grid-template-columns: 1fr;
+        gap: 0.375rem;
+    }
+    
+    .stock-item {
+        padding: 0.25rem 0;
+    }
+}
+
 @media (max-width: 768px) {
     .store-locator-hero {
         padding: 6rem 0 3rem;
