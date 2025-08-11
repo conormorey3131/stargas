@@ -113,14 +113,17 @@
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
+    color: white;
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
-    opacity: 0.9;
-    font-weight: 400;
+    opacity: 0.95;
+    font-weight: 500;
     margin-bottom: 2rem;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+    color: white;
 }
 
 .hero-features {
@@ -135,10 +138,13 @@
     align-items: center;
     gap: 0.5rem;
     font-weight: 600;
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
     padding: 0.75rem 1.25rem;
     border-radius: 2rem;
     backdrop-filter: blur(10px);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-feature i {
@@ -625,6 +631,15 @@
     padding: 4rem 0;
     background: var(--stargas-darkgray);
     color: white;
+    position: relative;
+}
+
+.performance-comparison::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+    pointer-events: none;
 }
 
 .performance-comparison h2 {
@@ -632,6 +647,10 @@
     font-weight: 700;
     text-align: center;
     margin-bottom: 3rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+    color: white;
+    position: relative;
+    z-index: 1;
 }
 
 .comparison-cards {
@@ -642,29 +661,36 @@
     flex-wrap: wrap;
     max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .comparison-card {
     flex: 1;
     min-width: 280px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.95);
     border-radius: var(--radius);
     padding: 2rem;
     backdrop-filter: blur(10px);
     transition: var(--transition);
+    color: var(--color-gray-900);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .comparison-card:hover {
     transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .nitrogen-card {
-    border: 2px solid #10B981;
+    border: 3px solid #059669;
+    border-left: 6px solid #059669;
 }
 
 .air-card {
-    border: 2px solid #EF4444;
+    border: 3px solid #DC2626;
+    border-left: 6px solid #DC2626;
 }
 
 .comparison-card h3 {
@@ -672,14 +698,17 @@
     font-weight: 700;
     margin-bottom: 1.5rem;
     text-align: center;
+    color: var(--color-gray-900);
 }
 
 .nitrogen-card h3 {
-    color: #10B981;
+    color: #059669;
+    text-shadow: none;
 }
 
 .air-card h3 {
-    color: #EF4444;
+    color: #DC2626;
+    text-shadow: none;
 }
 
 .comparison-list {
@@ -694,16 +723,19 @@
     gap: 0.75rem;
     padding: 0.5rem 0;
     font-weight: 500;
+    color: var(--color-gray-700);
 }
 
 .comparison-list .fa-check {
-    color: #10B981;
+    color: #059669;
     font-size: 1.125rem;
+    font-weight: 700;
 }
 
 .comparison-list .fa-times {
-    color: #EF4444;
+    color: #DC2626;
     font-size: 1.125rem;
+    font-weight: 700;
 }
 
 .vs-divider {
@@ -770,6 +802,11 @@
 @media (max-width: 768px) {
     .nitrogen-hero h1 {
         font-size: 2.5rem;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 0, 0, 0.6);
+    }
+    
+    .hero-subtitle {
+        text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
     }
     
     .hero-features {
@@ -804,6 +841,7 @@
     
     .comparison-cards {
         flex-direction: column;
+        gap: 1.5rem;
     }
     
     .vs-divider {
@@ -811,14 +849,24 @@
         width: 80px;
         height: 80px;
         font-size: 1.5rem;
+        background: rgba(245, 158, 11, 0.2);
+        border: 2px solid #F59E0B;
     }
     
     .nitrogen-card {
         order: 0;
+        min-width: auto;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
     }
     
     .air-card {
         order: 2;
+        min-width: auto;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
     }
     
     .cta-content h2 {

@@ -1,31 +1,29 @@
 User-agent: *
 Allow: /
 
-# Sitemap
+# Important pages for crawling
+Allow: /index.html
+Allow: /propane-gas.html
+Allow: /welding-gas.html
+Allow: /beer-gas.html
+Allow: /nitrogen.html
+Allow: /industrial-oxygen.html
+Allow: /propylene.html
+Allow: /helium.html
+Allow: /contact.html
+Allow: /store-locator.html
+
+# CSS and JS files
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Test files - disallow
+Disallow: /test-chatbot.html
+Disallow: /CHATBOT_TEST.md
+
+# Sitemap location
 Sitemap: https://www.stargas.ie/sitemap.xml
 
-# Crawl delay (optional, helps with server load)
+# Crawl delay to be respectful
 Crawl-delay: 1
-
-# Allow common web crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
-# Block access to admin areas (if any in future)
-Disallow: /admin/
-Disallow: /private/
-Disallow: /temp/
-Disallow: /.git/
-
-# Block access to common file types that shouldn't be indexed
-Disallow: /*.pdf$
-Disallow: /*.doc$
-Disallow: /*.docx$
-Disallow: /*.xls$
-Disallow: /*.xlsx$

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Test - Stargas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div style="padding: 2rem;">
+        <h1>Chatbot Test Page</h1>
+        <p>This page is for testing the AI helper chatbot functionality.</p>
+        <p>The chatbot button should appear in the bottom-right corner of the screen.</p>
+        
+        <div style="margin: 2rem 0;">
+            <h2>Expected Behavior:</h2>
+            <ul>
+                <li>Red pulsing chatbot button should appear in bottom-right</li>
+                <li>Click should open the chat widget</li>
+                <li>Welcome message should appear automatically</li>
+                <li>Suggestion buttons should be visible</li>
+                <li>Typing in the input should work</li>
+                <li>Bot should respond to common questions</li>
+            </ul>
+        </div>
+        
+        <div style="margin: 2rem 0;">
+            <h2>Test Questions to Try:</h2>
+            <ul>
+                <li>"Hello"</li>
+                <li>"Where is my nearest stockist?"</li>
+                <li>"What gas types do you supply?"</li>
+                <li>"What are your opening hours?"</li>
+                <li>"How do I contact you?"</li>
+                <li>"Do you supply beer gas?"</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/chatbot.js"></script>
+    <script src="js/chatbot-debug.js"></script>
+    
+    <script>
+        // Additional debug logging
+        console.log('Test page loaded');
+        
+        // Check if chatbot initialized after a delay
+        setTimeout(() => {
+            const chatbotContainer = document.getElementById('chatbotContainer');
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            
+            console.log('Chatbot container:', chatbotContainer);
+            console.log('Chatbot toggle:', chatbotToggle);
+            
+            if (chatbotContainer && chatbotToggle) {
+                console.log('✅ Chatbot successfully initialized!');
+                chatbotToggle.style.border = '3px solid lime'; // Visual indicator
+            } else {
+                console.error('❌ Chatbot failed to initialize');
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

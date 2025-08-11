@@ -4,8 +4,10 @@ class StargasChatbot {
         this.isOpen = false;
         this.isTyping = false;
         this.messages = [];
+        console.log('🤖 Stargas Chatbot initializing...');
         this.init();
         this.setupKnowledgeBase();
+        console.log('✅ Stargas Chatbot ready!');
     }
 
     setupKnowledgeBase() {
@@ -90,18 +92,54 @@ class StargasChatbot {
     }
 
     init() {
-        this.createChatbotHTML();
-        this.attachEventListeners();
-        this.addWelcomeMessage();
+        try {
+            this.createChatbotHTML();
+            this.attachEventListeners();
+            this.addWelcomeMessage();
+            
+            // Add a global test function
+            window.testChatbot = () => {
+                console.log('🧪 Testing chatbot...');
+                const button = document.getElementById('chatbotToggle');
+                if (button) {
+                    console.log('✅ Button found:', button);
+                    button.click();
+                } else {
+                    console.error('❌ Button not found!');
+                }
+            };
+        } catch (error) {
+            console.error('❌ Error during chatbot initialization:', error);
+        }
     }
 
     createChatbotHTML() {
-        const chatbotHTML = `
-            <div class="chatbot-container" id="chatbotContainer">
-                <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chat support">
-                    <i class="fas fa-comments"></i>
-                </button>
-                
+        // Create elements programmatically for better control
+        const container = document.createElement('div');
+        container.className = 'chatbot-container';
+        container.id = 'chatbotContainer';
+        
+        // Create toggle button
+        const toggleButton = document.createElement('button');
+        toggleButton.className = 'chatbot-toggle';
+        toggleButton.id = 'chatbotToggle';
+        toggleButton.setAttribute('aria-label', 'Open AI chat support');
+        toggleButton.setAttribute('title', 'Need help? Chat with our AI assistant');
+        toggleButton.type = 'button';
+        toggleButton.innerHTML = '<i class="fas fa-comments"></i>';
+        
+        // Add click handler directly
+        toggleButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('🖱️ Button clicked directly!');
+            this.toggleChat();
+        });
+        
+        container.appendChild(toggleButton);
+        
+        // Create widget HTML
+        const widgetHTML = `
                 <div class="chatbot-widget" id="chatbotWidget">
                     <div class="chatbot-header">
                         <h3>Stargas Assistant</h3>
@@ -132,21 +170,48 @@ class StargasChatbot {
                         </div>
                     </div>
                 </div>
-            </div>
         `;
         
-        document.body.insertAdjacentHTML('beforeend', chatbotHTML);
+        // Add widget HTML to container
+        container.insertAdjacentHTML('beforeend', widgetHTML);
+        
+        // Append container to body
+        document.body.appendChild(container);
+        console.log('🔧 Chatbot HTML injected into DOM');
+        
+        // Verify button was added
+        const verifyButton = document.getElementById('chatbotToggle');
+        if (verifyButton) {
+            console.log('✅ Chatbot button successfully added to DOM');
+        } else {
+            console.error('❌ Failed to add chatbot button!');
+        }
     }
 
     attachEventListeners() {
-        const toggle = document.getElementById('chatbotToggle');
+        // Toggle button already has listener from createChatbotHTML
         const close = document.getElementById('chatbotClose');
         const input = document.getElementById('chatbotInput');
         const send = document.getElementById('chatbotSend');
 
-        toggle.addEventListener('click', () => this.toggleChat());
-        close.addEventListener('click', () => this.closeChat());
-        send.addEventListener('click', () => this.sendMessage());
+        if (!close || !input || !send) {
+            console.error('❌ Some chatbot elements not found:', { close, input, send });
+            return;
+        }
+        
+        close.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.closeChat();
+        });
+        
+        send.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.sendMessage();
+        });
+        
+        console.log('🎯 Event listeners attached successfully');
         
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -167,6 +232,7 @@ class StargasChatbot {
     }
 
     toggleChat() {
+        console.log('🔄 Toggling chat, currently open:', this.isOpen);
         if (this.isOpen) {
             this.closeChat();
         } else {
@@ -181,7 +247,10 @@ class StargasChatbot {
         
         widget.classList.add('active');
         toggle.classList.add('active');
-        toggle.innerHTML = '<i class="fas fa-times"></i>';
+        const icon = toggle.querySelector('i');
+        if (icon) {
+            icon.className = 'fas fa-times';
+        }
         
         // Focus input
         setTimeout(() => {
@@ -196,7 +265,10 @@ class StargasChatbot {
         
         widget.classList.remove('active');
         toggle.classList.remove('active');
-        toggle.innerHTML = '<i class="fas fa-comments"></i>';
+        const icon = toggle.querySelector('i');
+        if (icon) {
+            icon.className = 'fas fa-comments';
+        }
     }
 
     addWelcomeMessage() {
@@ -355,8 +427,27 @@ You can also call us directly at 063 20700 or email sales@stargas.ie for persona
 
 // Initialize chatbot when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new StargasChatbot();
+    console.log('🚀 DOM loaded, initializing Stargas Chatbot...');
+    try {
+        window.stargasChatbot = new StargasChatbot();
+    } catch (error) {
+        console.error('❌ Error initializing chatbot:', error);
+    }
 });
+
+// Fallback initialization if DOMContentLoaded already fired
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    console.log('🚀 DOM already loaded, initializing Stargas Chatbot immediately...');
+    setTimeout(() => {
+        try {
+            if (!window.stargasChatbot) {
+                window.stargasChatbot = new StargasChatbot();
+            }
+        } catch (error) {
+            console.error('❌ Error in fallback initialization:', error);
+        }
+    }, 100);
+}
 
 // Analytics tracking (optional)
 function trackChatbotEvent(action, label = '') {

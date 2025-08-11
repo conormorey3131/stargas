@@ -262,15 +262,7 @@ class StoreLocator {
     
     createStoreCard(store) {
         const todayHours = this.getTodayHours(store);
-        const servicesHTML = store.services.slice(0, 4).map(service => {
-            const serviceInfo = serviceIcons[service];
-            return serviceInfo ? `
-                <span class="service-tag">
-                    <i class="${serviceInfo.icon}"></i>
-                    ${serviceInfo.label}
-                </span>
-            ` : '';
-        }).join('');
+        const servicesHTML = '';
         
         const distanceHTML = store.distance ? 
             `<div class="store-distance">${store.distance.toFixed(1)} km away</div>` : '';
@@ -301,9 +293,6 @@ class StoreLocator {
                     </div>
                 </div>
                 
-                <div class="store-services">
-                    ${servicesHTML}
-                </div>
                 
                 <div class="store-actions">
                     <a href="tel:${store.phone}" class="action-btn primary">
@@ -384,21 +373,12 @@ class StoreLocator {
     }
     
     createPopupContent(store) {
-        const servicesHTML = store.services.slice(0, 3).map(service => {
-            const serviceInfo = serviceIcons[service];
-            return serviceInfo ? `
-                <span class="service-tag">
-                    <i class="${serviceInfo.icon}"></i>
-                    ${serviceInfo.label}
-                </span>
-            ` : '';
-        }).join('');
+        const servicesHTML = '';
         
         return `
             <div class="popup-content">
                 <h3 class="popup-store-name">${store.name}</h3>
                 <p class="popup-address">${store.address}, ${store.city}</p>
-                <div class="popup-services">${servicesHTML}</div>
                 <div class="popup-actions">
                     <a href="tel:${store.phone}" class="popup-btn primary">Call</a>
                     <a href="https://maps.google.com/?q=${store.coordinates.lat},${store.coordinates.lng}" 
