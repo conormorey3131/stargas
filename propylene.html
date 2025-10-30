@@ -121,7 +121,7 @@
                         </button>
                     </div>
                     
-                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open menu">
                         <i class="fas fa-bars"></i>
                     </button>
                 </div>
@@ -136,7 +136,7 @@
                 <a href="index.html">
                     <img src="images/logo.png" alt="Stargas" width="100">
                 </a>
-                <button class="mobile-menu-close" id="mobileMenuClose">
+                <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -620,8 +620,22 @@
         </div>
     </footer>
 
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" id="chatbotToggle" aria-label="Open chatbot">
+            <i class="fas fa-comments"></i>
+        </button>
+        <div class="chatbot-widget" id="chatbotWidget">
+            <iframe
+                src="https://www.chatbase.co/chatbot-iframe/d4P8RB8MjwvG5Ftnz3Axy"
+                width="100%"
+                style="height: 100%; min-height: 700px"
+                frameborder="0"
+            ></iframe>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script src="js/propylene.js"></script>
-    <script src="js/chatbot.js"></script>
 </body>
 </html>

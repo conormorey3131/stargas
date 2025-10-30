@@ -245,3 +245,15 @@ document.addEventListener('DOMContentLoaded', () => {
         img.src = src;
     });
 });
+
+// Chatbot Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWidget = document.getElementById('chatbotWidget');
+
+    if (chatbotToggle && chatbotWidget) {
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWidget.classList.toggle('active');
+        });
+    }
+});
